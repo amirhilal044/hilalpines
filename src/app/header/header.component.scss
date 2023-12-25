@@ -1,0 +1,30 @@
+/* header.component.scss */
+
+:host ::ng-deep .p-menubar-root-list{
+  background-color: white;
+}
+
+:host ::ng-deep .p-menuitem-text,
+:host ::ng-deep .p-menuitem-icon {
+  color: black !important; /* Set the text and icon color to black */
+}
+
+:host ::ng-deep .p-menuitem-link {
+  box-sizing: border-box; /* Include the border in the element's total width and height */
+  border: 1px solid transparent; /* Set the default border color to transparent */
+  transition: border 0.3s ease, border-radius 0.3s ease; /* Add a smooth transition effect */
+}
+
+:host ::ng-deep .p-menuitem-link:hover {
+  border-color: #8CAB3E; /* Set the border color to smooth green when hovering */
+  border-radius: 20px; /* Set border-radius for curved borders */
+}
+
+
+:host ::ng-deep .p-menubar-button {
+  color: #8CAB3E !important;
+  
+  .pi{
+    font-size: 1.4rem;
+  }
+}

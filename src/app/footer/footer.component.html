@@ -1,0 +1,43 @@
+<footer
+  class="py-4 flex flex-wrap md:text-left text-center justify-content-around line-height-4 surface-hover align-items-center"
+>
+  <img class="w-6 md:w-2" src="assets/images/LOGO.png" />
+  <div class="flex flex-column">
+    <h3 class="bgColor">Hilal Pines</h3>
+    <a [routerLink]="['/about']" class="black-colored">About Us</a>
+    <a [routerLink]="['/products']" class="black-colored">Our Products</a>
+    <a [routerLink]="['/contact']" class="black-colored">Contact Us</a>
+  </div>
+  <div class="flex flex-column">
+    <h3 class="bgColor">Information</h3>
+    <a [routerLink]="['/terms-and-services']" class="black-colored">Terms & Services</a>
+    <a [routerLink]="['/privacy-and-policy']" class="black-colored">Privacy & Policy</a>
+    <a [routerLink]="['/refund-policy']" class="black-colored">Refund Policy</a>
+  </div>
+  <div class="flex flex-column">
+    <h3 class="bgColor">Follow us</h3>
+    <div class="flex gap-2">
+      <button
+        pButton
+        pRipple
+        icon="pi pi-instagram"
+        class="p-button-rounded p-button-outlined"
+        onclick="window.open('https://www.instagram.com/hilalpines/', '_blank')"
+      ></button>
+      <button
+        pButton
+        pRipple
+        icon="pi pi-whatsapp"
+        class="p-button-rounded p-button-outlined"
+        onclick="window.open('https://wa.me/+96170634141/', '_blank')"
+      ></button>
+      <button
+        pButton
+        pRipple
+        icon="pi pi-facebook"
+        class="p-button-rounded p-button-outlined"
+        onclick="window.open('https://www.facebook.com/hilalpines/', '_blank')"
+      ></button>
+    </div>
+  </div>
+</footer>
