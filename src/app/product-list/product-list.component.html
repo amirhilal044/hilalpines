@@ -1,7 +1,11 @@
 
 <div class="top-section">
-  <button (click)="redirectToPackages()">Go to Packages List</button>
-  <button (click)="redirectToCart()">Open Cart</button>
+  <button style="display: flex; flex-direction: row; align-items: center;" (click)="redirectToPackages()"><p>Go to Packages List </p></button>
+  <img src="../../assets/images/icons/product.png" height="40">
+  <button style="display: flex; flex-direction: row; align-items: center;" (click)="redirectToCart()" class="cart-button" [ngClass]="{'has-items': getNumberOfCartItems() > 0}">
+    <p>Open Cart </p>
+    <span *ngIf="getNumberOfCartItems() > 0" class="notification-badge">{{ getNumberOfCartItems() }}</span>
+  </button>
 </div>
 
 <div class="product-card" *ngFor="let product of products" [class.selected]="isSelected(product)">
@@ -19,7 +23,7 @@
   </div>
 
   <div class="buttons">
-    <button class="read-more">Read More</button>
+    <button (click)="toggleShowDetails()" class="read-more">Read More</button>
 
 
     <div class="plus-minus">
@@ -36,4 +40,10 @@
     
     </div>
   </div>
+
+  <div class="read-more-overlay" *ngIf="showDetails">
+    <p>{{ product.name }}</p>
+    <button (click)="toggleCloseDetails()">x</button>
+  </div>
 </div>
+

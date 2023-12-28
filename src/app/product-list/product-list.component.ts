@@ -6,7 +6,7 @@ import { ProductPackageDto } from '../shared/product-packages.dto';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.scss'],
+  styleUrls: ['../shared/product-package.component.scss'],
 })
 export class ProductListComponent {
   constructor(
@@ -15,7 +15,7 @@ export class ProductListComponent {
   ) {}
 
   products: any[] = [];
-
+  showDetails:boolean= false;
   ngOnInit() {
     this.products = this.productspackagescartService.getProducts();
   }
@@ -43,4 +43,16 @@ export class ProductListComponent {
   isSelected(item: ProductPackageDto): boolean {
     return this.productspackagescartService.getSelectedQuantity(item.id)>0;
   }
+
+  getNumberOfCartItems(){
+    return this.productspackagescartService.getAllItems().length
+  }
+  toggleShowDetails():void{
+    this.showDetails = true
+  }
+
+  toggleCloseDetails():void{
+    this.showDetails = false
+  }
+  
 }

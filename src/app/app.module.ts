@@ -32,6 +32,7 @@ import { HomeComponent } from './home/home.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { PackagesListComponent } from './packages-list/packages-list.component';
 import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { CartComponent } from './cart/cart.component';
     ProductListComponent,
     PackagesListComponent,
     CartComponent,
+    CheckoutComponent,
   ],
   imports: [
     CardModule,

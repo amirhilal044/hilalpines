@@ -8,15 +8,17 @@ import { ProductPackageDto } from '../shared/product-packages.dto';
 @Component({
   selector: 'app-packages-list',
   templateUrl: './packages-list.component.html',
-  styleUrls: ['./packages-list.component.scss'],
+  styleUrls: ['../shared/product-package.component.scss'],
 })
 export class PackagesListComponent {
-  constructor(private router: Router, private productspackagescartService:ProductsPackagesCartService) {}
+  constructor(private router: Router, private productpackagecartService:ProductsPackagesCartService) {}
  
   packages :any = []
+  showDetails: boolean =false;
+
 
   ngOnInit(){
-    this.packages = this.productspackagescartService.getPackages()
+    this.packages = this.productpackagecartService.getPackages()
   }
 
   countItemsWithId(items: number[], targetId: number): number {
@@ -33,18 +35,30 @@ export class PackagesListComponent {
   }
 
   getSelectedQuantity(id:number) {
-    return this.productspackagescartService.getSelectedQuantity(id)
+    return this.productpackagecartService.getSelectedQuantity(id)
   }
 
   addToCart(product: any): void {
-    this.productspackagescartService.addToCart(product);
+    this.productpackagecartService.addToCart(product);
   }
 
   removeFromCart(product: any): void {
-    this.productspackagescartService.removeFromCart(product);
+    this.productpackagecartService.removeFromCart(product);
   }
 
   isSelected(item: ProductPackageDto): boolean {
-    return this.productspackagescartService.getSelectedQuantity(item.id)>0;
+    return this.productpackagecartService.getSelectedQuantity(item.id)>0;
   }
+  getNumberOfCartItems(){
+    return this.productpackagecartService.getAllItems().length
+  }
+
+  toggleShowDetails():void{
+    this.showDetails = true
+  }
+
+  toggleCloseDetails():void{
+    this.showDetails = false
+  }
+  
 }

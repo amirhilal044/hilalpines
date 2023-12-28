@@ -1,6 +1,10 @@
 <div class="top-section">
-  <button (click)="redirectToProducts()">Go to Products List</button>
-  <button (click)="redirectToCart()">Open Cart</button>
+  <button style="display: flex; flex-direction: row; align-items: center;" (click)="redirectToProducts()"><p>Go to Products List </p></button>
+  <img src="../../assets/images/icons/package.png" height="40">
+  <button style="display: flex; flex-direction: row; align-items: center;" (click)="redirectToCart()" class="cart-button" [ngClass]="{'has-items': getNumberOfCartItems() > 0}">
+   <p>Open Cart </p>
+    <span *ngIf="getNumberOfCartItems() > 0" class="notification-badge">{{ getNumberOfCartItems() }}</span>
+  </button>
 
 </div>
 
@@ -15,15 +19,16 @@
       alt="{{ package.name }}"
       class="product-image"
     />
+
     <div class="product-info">
       <h3>{{ package.name }}</h3>
       <p>{{ package.description }}</p>
-      <p class="price">Price: ${{ package.price }}/kg</p>
+      <p>Price: ${{ package.price }}/kg</p>
     </div>
   </div>
 
   <div class="buttons">
-    <button class="read-more">Read More</button>
+    <button (click)="toggleShowDetails()" class="read-more">Read More</button>
 
     <div class="plus-minus">
       <button
@@ -43,4 +48,11 @@
       </button>
     </div>
   </div>
+
+  <div class="read-more-overlay" *ngIf="showDetails">
+    <p>{{ package.name }}</p>
+    <button (click)="toggleCloseDetails()">x</button>
+  </div>
 </div>
+
+

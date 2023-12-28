@@ -4,6 +4,7 @@ export class ProductPackageDto {
     name: string;
     price: number;
     description: string;
-    image_link: string
+    image_link: string;
+    type: string
   }
   
