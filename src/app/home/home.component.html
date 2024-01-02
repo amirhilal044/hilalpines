@@ -2,40 +2,29 @@
   <div
     class="flex flex-column md:flex-row md:justify-content-around align-items-center w-12 homeImage"
   >
-    <div class="align-self-center w-8 md:w-4 mt-4 md:mt-0">
+    <div
+      class="align-self-center w-8 md:w-4 mt-4 md:mt-0"
+      style="margin: 0% 0% 5%"
+    >
       <p
         class="line-height-3 md:text-xl mt-3 md:mt-0 text-left md:text-justify mb-2"
       >
-        A legacy that began in 1970 with a commitment to providing
-        premium-quality Lebanese pine nuts. Over the decades, we've expanded our
-        offerings to include a diverse selection of nuts such as almonds,
-        walnuts, pistachios, raisins, cranberries, pecans, and more. Rooted in
-        tradition and quality, our brand has become synonymous with excellence.
-        Beyond nuts, we proudly offer a range of honey and its derived products.
-        At the heart of our values is a dedication to delivering the finest,
-        handpicked selections to your table. Explore the rich flavors of our
-        products and join us in celebrating the taste of tradition.
+        Since 1970, we've been dedicated to providing premium Lebanese pine
+        nuts. Our legacy now includes a variety of nuts like almonds, walnuts,
+        pistachios, raisins, cranberries, pecans, and more. Rooted in tradition
+        and quality, our brand is synonymous with excellence. Beyond nuts, we
+        offer a range of honey and its derivatives. Committed to delivering
+        handpicked selections, join us in celebrating the taste of tradition.
       </p>
 
-  
-
-  
       <p-button
         type="button"
         label="SEE PRODUCTS"
         [routerLink]="['/products']"
       ></p-button>
-      <p-button
-        type="button"
-        label="CONTACT US"
-        [routerLink]="['/contact']"
-      ></p-button>
-
-      <!-- your existing code... -->
     </div>
-    <!-- until I get all offers available -->
-    <!-- <p-carousel
-      [value]="offers"
+    <p-carousel
+      [value]="packages"
       class="w-9 md:w-3 my-2 md:my-8"
       [numVisible]="1"
       [numScroll]="1"
@@ -44,24 +33,24 @@
       [showNavigators]="false"
       [showIndicators]="false"
     >
-      <ng-template let-product pTemplate="item">
+      <ng-template let-package pTemplate="item">
         <div class="product-item">
           <div class="product-item-content">
             <div class="mb-3">
               <img
-                [src]="'assets/images/OFFERS/' + product.image"
-                [alt]="product.name"
+                [src]="'assets/images/OFFERS/' + package.image"
+                [alt]="package.name"
                 class="product-image"
               />
             </div>
             <div>
-              <h2 class="mt-5">{{ product.name }}</h2>
-              <h3 class="font-bold text-2xl">${{ product.price }}</h3>
+              <h2 class="mt-5">{{ package.name }}</h2>
+              <h3 class="font-bold text-2xl">${{ package.price }}</h3>
             </div>
           </div>
         </div>
       </ng-template>
-    </p-carousel> -->
+    </p-carousel>
   </div>
 
   <div class="text-center mt-8">
@@ -76,9 +65,9 @@
     </div>
   </div>
   <!-- unitl i get all the offers done -->
-  <!-- 
+  
   <p-carousel
-    [value]="offers"
+    [value]="packages"
     class="w-full"
     [numVisible]="3"
     [numScroll]="1"
@@ -89,7 +78,7 @@
   >
     <ng-template let-product pTemplate="item">
       <div class="product-item">
-        <div class="product-item-content item-dark">
+        <div class="product-item-content ">
           <div class="mb-3">
             <img
               [src]="'assets/images/OFFERS/' + product.image"
@@ -102,17 +91,17 @@
               <h4 class="mb-1">{{ product.name }}</h4>
               <h6 class="mt-0 mb-3 font-bold text-xl">${{ product.price }}</h6>
             </div>
-            <p-button
+            <!-- <p-button
               *ngIf="isLoggedIn"
               icon="pi pi-trash"
               styleClass="p-button-rounded"
               (onClick)="onDelete(product)"
-            ></p-button>
+            ></p-button> -->
           </div>
         </div>
       </div>
     </ng-template>
-  </p-carousel> -->
+  </p-carousel>
 
   <button
     pButton

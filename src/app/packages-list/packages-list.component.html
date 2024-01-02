@@ -1,58 +1,67 @@
 <div class="top-section">
-  <button style="display: flex; flex-direction: row; align-items: center;" (click)="redirectToProducts()"><p>Go to Products List </p></button>
-  <img src="../../assets/images/icons/package.png" height="40">
-  <button style="display: flex; flex-direction: row; align-items: center;" (click)="redirectToCart()" class="cart-button" [ngClass]="{'has-items': getNumberOfCartItems() > 0}">
-   <p>Open Cart </p>
-    <span *ngIf="getNumberOfCartItems() > 0" class="notification-badge">{{ getNumberOfCartItems() }}</span>
+  <button class="top-section-buttons" (click)="redirectToProducts()">
+    <p>Go to Products List</p>
   </button>
-
+  <img src="../../assets/images/icons/package.png" height="40" />
+  <button
+    (click)="redirectToCart()"
+    class="cart-button top-section-buttons"
+    [ngClass]="{ 'has-items': getNumberOfCartItems() > 0 }"
+  >
+    <p>Open Cart</p>
+    <span *ngIf="getNumberOfCartItems() > 0" class="notification-badge">{{
+      getNumberOfCartItems()
+    }}</span>
+  </button>
 </div>
+<div class="displaying">
+  <div
+    class="product-card"
+    *ngFor="let package of packages"
+    [class.selected]="isSelected(package)"
+  >
+    <div class="card-header">
+      <img
+        [src]="package.image_link"
+        alt="{{ package.name }}"
+        class="product-image"
+      />
 
-<div
-  class="product-card"
-  *ngFor="let package of packages"
-  [class.selected]="isSelected(package)"
->
-  <div class="card-header">
-    <img
-      [src]="package.image_link"
-      alt="{{ package.name }}"
-      class="product-image"
-    />
-
-    <div class="product-info">
-      <h3>{{ package.name }}</h3>
-      <p>{{ package.description }}</p>
-      <p>Price: ${{ package.price }}/kg</p>
+      <div class="product-info">
+        <h3>{{ package.name }}</h3>
+        <p>{{ package.description }}</p>
+        <p>Price: ${{ package.price }}/kg</p>
+      </div>
     </div>
-  </div>
 
-  <div class="buttons">
-    <button (click)="toggleShowDetails()" class="read-more">Read More</button>
+    <div class="buttons">
+      <button (click)="toggleShowDetails(package)" class="read-more">Read More</button>
 
-    <div class="plus-minus">
-      <button
-        (click)="removeFromCart(package)"
-        class="p-button p-button-secondary p-button-icon-only"
-      >
-        <span class="pi pi-minus"></span>
-      </button>
+      <div class="plus-minus">
+        <button
+          (click)="removeFromCart(package)"
+          class="p-button p-button-secondary p-button-icon-only"
+        >
+          <span class="pi pi-minus"></span>
+        </button>
 
-      <span class="quantity-counter">{{ getSelectedQuantity(package.id) }}</span>
+        <span class="quantity-counter">{{
+          getSelectedQuantity(package.id)
+        }}</span>
 
-      <button
-        (click)="addToCart(package)"
-        class="p-button p-button-secondary p-button-icon-only"
-      >
-        <span class="pi pi-plus"></span>
-      </button>
+        <button
+          (click)="addToCart(package)"
+          class="p-button p-button-secondary p-button-icon-only"
+        >
+          <span class="pi pi-plus"></span>
+        </button>
+      </div>
     </div>
-  </div>
 
+  
+  </div>
   <div class="read-more-overlay" *ngIf="showDetails">
-    <p>{{ package.name }}</p>
+    <p>{{packageDetails.name}}</p>
     <button (click)="toggleCloseDetails()">x</button>
   </div>
 </div>
-
-

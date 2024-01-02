@@ -12,8 +12,8 @@ import { ProductPackageDto } from '../shared/product-packages.dto';
 })
 export class PackagesListComponent {
   constructor(private router: Router, private productpackagecartService:ProductsPackagesCartService) {}
- 
   packages :any = []
+  packageDetails: any
   showDetails: boolean =false;
 
 
@@ -53,11 +53,13 @@ export class PackagesListComponent {
     return this.productpackagecartService.getAllItems().length
   }
 
-  toggleShowDetails():void{
+  toggleShowDetails(packages:any):void{
+    this.packageDetails = packages
     this.showDetails = true
   }
 
   toggleCloseDetails():void{
+    this.packageDetails = null;
     this.showDetails = false
   }
   

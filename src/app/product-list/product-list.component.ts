@@ -16,6 +16,7 @@ export class ProductListComponent {
 
   products: any[] = [];
   showDetails:boolean= false;
+  productDetails: any;
   ngOnInit() {
     this.products = this.productspackagescartService.getProducts();
   }
@@ -47,11 +48,13 @@ export class ProductListComponent {
   getNumberOfCartItems(){
     return this.productspackagescartService.getAllItems().length
   }
-  toggleShowDetails():void{
+  toggleShowDetails(product:any):void{
+    this.productDetails = product
     this.showDetails = true
   }
 
   toggleCloseDetails():void{
+    this.productDetails = null;
     this.showDetails = false
   }
   
