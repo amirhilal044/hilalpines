@@ -1,0 +1,76 @@
+<div class="overlay" style="z-index: 98">
+  <div class="cart-container">
+    <div class="cart-header">
+      <img src="../../assets/images/icons/cart.png" height="60" />
+      <button (click)="closeCart()">Continue Shopping</button>
+    </div>
+
+    <section style="overflow-y: scroll; max-height: 400px">
+      <div
+        class="product-card"
+        *ngFor="let package of getAllItems()"
+        [class.selected]="isSelected(package)"
+      >
+        <div class="card-header">
+          <img
+            [src]="package.image_link"
+            alt="{{ package.name }}"
+            class="product-image"
+          />
+
+          <div class="product-info">
+            <h3>{{ package.name }}</h3>
+            <p>{{ package.description }}</p>
+            <p>Price: ${{ package.price }}/kg</p>
+          </div>
+        </div>
+
+        <div class="buttons">
+          <button (click)="toggleShowDetails()" class="read-more">
+            Read More
+          </button>
+
+          <div class="plus-minus">
+            <button
+              (click)="removeFromCart(package)"
+              class="p-button p-button-secondary p-button-icon-only"
+            >
+              <span class="pi pi-minus"></span>
+            </button>
+
+            <span class="quantity-counter">{{ package.quantity }}</span>
+
+            <button
+              (click)="addToCart(package)"
+              class="p-button p-button-secondary p-button-icon-only"
+            >
+              <span class="pi pi-plus"></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="read-more-overlay" *ngIf="showDetails">
+          <p>more details</p>
+          <button (click)="toggleCloseDetails()">x</button>
+        </div>
+      </div>
+    </section>
+    <div class="cart-footer">
+      <button class="red-button" (click)="clearCart()">Clear Cart</button>
+      <button
+        [ngClass]="{ disabled: getAllItems().length === 0 }"
+        [disabled]="getAllItems().length === 0"
+        class="checkout"
+        (click)="checkout()"
+      >
+        Checkout
+      </button>
+    </div>
+
+    <div *ngIf="showConfirmationModal" class="confirmation-modal">
+      <p>Are you sure you want to clear the cart?</p>
+      <button (click)="confirmClearCart()">Yes</button>
+      <button (click)="cancelClearCart()">No</button>
+    </div>
+  </div>
+</div>

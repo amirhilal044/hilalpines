@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
+  packages:any = [{}]
   responsiveOptions = [
     {
       breakpoint: '1024px',

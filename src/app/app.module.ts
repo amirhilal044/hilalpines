@@ -29,9 +29,15 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { PackagesListComponent } from './packages-list/packages-list.component';
-import { CartComponent } from './cart/cart.component';
+import { CartComponent } from './items/cart/cart.component';
+import { CheckoutComponent } from './checkoutAndPay/checkout/checkout.component';
+import { PackagesListComponent } from './items/packages-list/packages-list.component';
+import { ProductListComponent } from './items/product-list/product-list.component';
+import { OrderInfoComponent } from './checkoutAndPay/order-info/order-info.component';
+import { LoginComponent } from './admin/login/login.component';
+import { ProductUploadComponent } from './admin/product-upload/product-upload.component';
+import { PackageUploadComponent } from './admin/package-upload/package-upload.component';
+import { AllItemsComponent } from './admin/all-items/all-items.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +49,12 @@ import { CartComponent } from './cart/cart.component';
     ProductListComponent,
     PackagesListComponent,
     CartComponent,
+    CheckoutComponent,
+    OrderInfoComponent,
+    LoginComponent,
+    ProductUploadComponent,
+    PackageUploadComponent,
+    AllItemsComponent,
   ],
   imports: [
     CardModule,
