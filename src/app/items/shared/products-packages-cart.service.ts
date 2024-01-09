@@ -13,54 +13,60 @@ export class ProductsPackagesCartService {
 
   cartItems: ProductPackageDto[] = []
 
-  products: ProductPackageDto[] = [
-    {
-      id: 101,
-      name: 'Product 1',
-      price: 20.99,
-      description: 'Description for Product 1',
-      image_link: 'https://i.imgur.com/bgP0tiQ.jpeg',
-      type: "product"
-    },
-    {
-      id: 102,
-      name: 'Product 2',
-      price: 23.99,
-      description: 'Description for Product 2',
-      image_link: 'https://i.imgur.com/bgP0tiQ.jpeg',
-      type: "product"
+  products: ProductPackageDto[] = [];
 
-    },
-    // Add more products here
-  ];
-
-  packages: ProductPackageDto[] = [
-    {
-      id: 201,
-      name: 'package 1',
-      price: 50.99,
-      description: 'Description for package 1',
-      image_link: 'https://i.imgur.com/bgP0tiQ.jpeg',
-      type: "package"
-
-    },
-    {
-      id: 202,
-      name: 'Package 2',
-      price: 23.99,
-      description: 'Description for pacakge 2',
-      image_link: 'https://i.imgur.com/bgP0tiQ.jpeg',
-      type: "package"
-
-    },
-    // Add more products here
-  ];
+  packages: ProductPackageDto[] = [];
 
   constructor(private router:Router) {}
 
+
+  ngOnInit(){
+    this.products = [
+      {
+        id: 101,
+        name: 'Product 1',
+        price: 20.99,
+        description: 'Description for Product 1',
+        image_link: 'https://i.imgur.com/bgP0tiQ.jpeg',
+        type: "product"
+      },
+      {
+        id: 102,
+        name: 'Product 2',
+        price: 23.99,
+        description: 'Description for Product 2',
+        image_link: 'https://i.imgur.com/bgP0tiQ.jpeg',
+        type: "product"
+  
+      },
+      // Add more products here
+    ]
+
+    this.packages = [
+      {
+        id: 201,
+        name: 'package 1',
+        price: 50.99,
+        description: 'Description for package 1',
+        image_link: 'https://i.imgur.com/bgP0tiQ.jpeg',
+        type: "package"
+  
+      },
+      {
+        id: 202,
+        name: 'Package 2',
+        price: 23.99,
+        description: 'Description for pacakge 2',
+        image_link: 'https://i.imgur.com/bgP0tiQ.jpeg',
+        type: "package"
+  
+      },
+      // Add more products here
+    ]
+  }
+
   addToCart(item: ProductPackageDto): void {
     this.cartItems.push(item);
-    console.log(this.cartItems)
   }
 
   removeFromCart(item: ProductPackageDto): void {
@@ -69,7 +75,6 @@ export class ProductsPackagesCartService {
     if (index !== -1) {
       this.cartItems.splice(index, 1);
     }
-    console.log(this.cartItems)
 
 
   }

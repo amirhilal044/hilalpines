@@ -4,27 +4,39 @@ import { AboutComponent } from './about/about.component';
 
 import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { PackagesListComponent } from './packages-list/packages-list.component';
-import { CartComponent } from './cart/cart.component';
-import { CheckoutComponent } from './checkout/checkout.component';
+import { CartComponent } from './items/cart/cart.component';
+import { CheckoutComponent } from './checkoutAndPay/checkout/checkout.component';
+import { PackagesListComponent } from './items/packages-list/packages-list.component';
+import { ProductListComponent } from './items/product-list/product-list.component';
+import { LoginComponent } from './admin/login/login.component';
+import { PackageUploadComponent } from './admin/package-upload/package-upload.component';
+import { ProductUploadComponent } from './admin/product-upload/product-upload.component';
+import { AllItemsComponent } from './admin/all-items/all-items.component';
 
 
 const routes: Routes = [
-  // {
-  //   path: 'admin',
-  //   component: LoginComponent,
-  // },
-  // {
-  //   path: 'offer-upload',
-  //   component: OfferUploadComponent,
-  //   canActivate: [AuthGuardService],
-  // },
-  // {
-  //   path: 'product-upload',
-  //   component: ProductUploadComponent,
-  //   canActivate: [AuthGuardService],
-  // },
+  {
+    path: 'admin/login',
+    component: LoginComponent,
+  },
+  {
+    path: 'admin',
+    // canActivate: [AuthGuardService],
+    children: [
+      {
+        path: 'offer-upload',
+        component: PackageUploadComponent,
+      },
+      {
+        path: 'product-upload',
+        component: ProductUploadComponent,
+      },
+      {
+        path: 'all-items',
+        component: AllItemsComponent,
+      },
+    ],
+  },
   {
     path: 'home',
     component: HomeComponent,

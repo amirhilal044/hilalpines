@@ -1,0 +1,88 @@
+.displaying {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.product-card {
+  margin: 0 0 30px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 5%;
+  width: 44%;
+}
+.product-card .product-image {
+  transition: transform 0.3s ease-in-out; /* Adjust the duration and easing as needed */
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.1); /* Adjust the scaling factor as needed */
+}
+
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px;
+
+  button {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #8cab3e;
+    border: #8cab3e 1px solid;
+    color: white;
+    transition: all 0.3s, all 0.3s;
+  }
+
+  button:hover {
+    color: #8cab3e;
+    background-color: #f3f1e6;
+  }
+  .top-section-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+  }
+}
+
+.card-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.notification-badge {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 3px 8px;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+}
+
+.cart-button.has-items {
+  position: relative;
+}
+
+.product-image {
+  margin: 0;
+  width: 35%;
+  height: max-content;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 70px;
+  margin-left: 3%;
+  color: #8cab3e;
+  font-size: smaller;
+}
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}

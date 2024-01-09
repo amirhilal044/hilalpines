@@ -37,7 +37,7 @@
     border: #8cab3e solid 1px;
     border-radius: 5px;
     transition: all 0.3s, all 0.3s;
-
+    color: white;
   }
 
   @media (min-width: 900px) {
@@ -64,10 +64,6 @@
   height: max-content;
 }
 
-section{
-  overflow-y: scroll;
-  max-height: 400px;
-}
 .buttons {
   display: flex;
   justify-content: space-between;
@@ -141,7 +137,7 @@ section{
     border-radius: 5px;
     width: 30%;
     transition: all 0.3s, all 0.3s;
-
+    color: white;
   }
 
   .disabled {
@@ -198,6 +194,7 @@ section{
 
 .red-button {
   background-color: red;
+  color: white;
   border: none;
   padding: 5px;
   border-radius: 5px;

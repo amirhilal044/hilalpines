@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProductsPackagesCartService } from '../shared/products-packages-cart.service';
 import { ProductPackageDto } from '../shared/product-packages.dto';
+import { ProductsPackagesCartService } from '../shared/products-packages-cart.service';
 
 
 
 @Component({
   selector: 'app-packages-list',
   templateUrl: './packages-list.component.html',
-  styleUrls: ['../shared/product-package.component.scss'],
+  styleUrls: ['../shared/product-package.component.scss', '../shared/product-package-two.component.scss'],
 })
 export class PackagesListComponent {
   constructor(private router: Router, private productpackagecartService:ProductsPackagesCartService) {}

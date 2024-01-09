@@ -15,6 +15,20 @@
         <span>({{ item.quantity }})</span>
         <span>${{ getSmallTotalPrice(item) }}</span>
       </div>
+      <hr />
+      <div class="checkout-item">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span>${{ getTotalPrice() }}</span>
+      </div>
+ 
+
+      <div class="checkout-item">
+        <button (click)="gotocart()">Back</button>
+
+        <button (click)="processPayment()">Proceed to Payment</button>
+      </div>
     </div>
   </div>
 </div>

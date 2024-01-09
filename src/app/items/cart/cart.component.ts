@@ -1,8 +1,8 @@
 // cart.component.ts
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductPackageDto } from '../shared/product-packages.dto';
 import { ProductsPackagesCartService } from '../shared/products-packages-cart.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -21,10 +21,16 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartItems = this.productpackagecartService.getAllItems();
+    if (!this.cartItems || this.cartItems.length === 0) {
+      this.router.navigate(['/products']);
+    }
   }
 
   ngDoCheck(): void {
     this.cartItems = this.productpackagecartService.getAllItems();
+    if (!this.cartItems || this.cartItems.length === 0) {
+      this.router.navigate(['/products']);
+    }
   }
 
   closeCart(): void {
