@@ -1,3 +1,4 @@
+import { TabViewModule } from 'primeng/tabview';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -19,7 +20,6 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
 import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
-import { RatingModule } from 'primeng/rating';
 import { RippleModule } from 'primeng/ripple';
 import { ToastModule } from 'primeng/toast';
 import { AboutComponent } from './about/about.component';
@@ -38,6 +38,8 @@ import { LoginComponent } from './admin/login/login.component';
 import { ProductUploadComponent } from './admin/product-upload/product-upload.component';
 import { PackageUploadComponent } from './admin/package-upload/package-upload.component';
 import { AllItemsComponent } from './admin/all-items/all-items.component';
+import { ItemsListComponent } from './items/items-list/items-list.component';
+
 
 @NgModule({
   declarations: [
@@ -55,8 +57,10 @@ import { AllItemsComponent } from './admin/all-items/all-items.component';
     ProductUploadComponent,
     PackageUploadComponent,
     AllItemsComponent,
+    ItemsListComponent,
   ],
   imports: [
+    TabViewModule,
     CardModule,
     InputNumberModule,
     GalleriaModule,
@@ -71,7 +75,6 @@ import { AllItemsComponent } from './admin/all-items/all-items.component';
     InputTextModule,
     CarouselModule,
     RippleModule,
-    RatingModule,
     ButtonModule,
     DropdownModule,
     ToastModule,
