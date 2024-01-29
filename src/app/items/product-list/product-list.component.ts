@@ -18,12 +18,13 @@ export class ProductListComponent {
   showDetails:boolean= false;
   productDetails: any;
   ngOnInit() {
+    console.log("before:" , this.products)
     this.products = this.productspackagescartService.getProducts();
+    console.log("after:" , this.products)
+
   }
 
-  redirectToPackages(): void {
-    this.router.navigate(['/packages']);
-  }
+
 
   redirectToCart(): void {
     this.router.navigate(['/cart']);
@@ -48,14 +49,9 @@ export class ProductListComponent {
   getNumberOfCartItems(){
     return this.productspackagescartService.getAllItems().length
   }
-  toggleShowDetails(product:any):void{
-    this.productDetails = product
+  
+  showDialog():void{
     this.showDetails = true
-  }
-
-  toggleCloseDetails():void{
-    this.productDetails = null;
-    this.showDetails = false
   }
   
 }

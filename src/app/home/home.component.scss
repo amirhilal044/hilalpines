@@ -31,16 +31,10 @@
   margin: 10px;
 }
 
-:host ::ng-deep .p-button.p-component {
-  background-color: #8cab3e !important;
-  color: white;
-  border: #8cab3e 1px solid;
-}
-
 
 :host ::ng-deep .p-button.p-component:hover {
   background-color: #f3f1e6 !important;
-  color: #8cab3e;
+  color: #4caf50;
 }
 .homeImage {
   background-image: url(../../assets/images/PINEFOREST.jpg);

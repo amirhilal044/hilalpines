@@ -20,50 +20,9 @@ export class ProductsPackagesCartService {
   constructor(private router:Router) {}
 
 
-  ngOnInit(){
-    this.products = [
-      {
-        id: 101,
-        name: 'Product 1',
-        price: 20.99,
-        description: 'Description for Product 1',
-        image_link: 'https://i.imgur.com/bgP0tiQ.jpeg',
-        type: "product"
-      },
-      {
-        id: 102,
-        name: 'Product 2',
-        price: 23.99,
-        description: 'Description for Product 2',
-        image_link: 'https://i.imgur.com/bgP0tiQ.jpeg',
-        type: "product"
-  
-      },
-      // Add more products here
-    ]
-
-    this.packages = [
-      {
-        id: 201,
-        name: 'package 1',
-        price: 50.99,
-        description: 'Description for package 1',
-        image_link: 'https://i.imgur.com/bgP0tiQ.jpeg',
-        type: "package"
-  
-      },
-      {
-        id: 202,
-        name: 'Package 2',
-        price: 23.99,
-        description: 'Description for pacakge 2',
-        image_link: 'https://i.imgur.com/bgP0tiQ.jpeg',
-        type: "package"
-  
-      },
-      // Add more products here
-    ]
-  }
+ 
+    
+ 
 
   addToCart(item: ProductPackageDto): void {
     this.cartItems.push(item);
@@ -86,10 +45,51 @@ export class ProductsPackagesCartService {
   
   
   getProducts(): ProductPackageDto[] {
+    this.products = [
+      {
+        id: 101,
+        name: 'Product 1',
+        price: 20.99,
+        description: 'Description for Product 1',
+        image_link: 'https://i.imgur.com/bgP0tiQ.jpeg',
+        type: "product"
+      },
+      {
+        id: 102,
+        name: 'Product 2',
+        price: 23.99,
+        description: 'Description for Product 2',
+        image_link: 'https://i.imgur.com/bgP0tiQ.jpeg',
+        type: "product"
+  
+      },
+      // Add more products here
+    ]
     return this.products;
   }
 
   getPackages(): ProductPackageDto[] {
+    this.packages = [
+      {
+        id: 201,
+        name: 'package 1',
+        price: 50.99,
+        description: 'Description for package 1',
+        image_link: 'https://i.imgur.com/bgP0tiQ.jpeg',
+        type: "package"
+  
+      },
+      {
+        id: 202,
+        name: 'Package 2',
+        price: 23.99,
+        description: 'Description for pacakge 2',
+        image_link: 'https://i.imgur.com/bgP0tiQ.jpeg',
+        type: "package"
+  
+      },
+      // Add more products here
+    ]
     return this.packages;
   }
 

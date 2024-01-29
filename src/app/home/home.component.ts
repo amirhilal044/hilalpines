@@ -1,15 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
-
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  packages:any = [{}]
+  packages: any = [{}];
   responsiveOptions = [
     {
       breakpoint: '1024px',
@@ -30,13 +28,7 @@ export class HomeComponent {
 
   isLoggedIn: boolean = false;
 
-  constructor(
-    private readonly httpClient: HttpClient,
+  constructor(private readonly httpClient: HttpClient) {}
 
-  ) {}
-
-  ngOnInit(): void {
-
-   
-  }
+  ngOnInit(): void {}
 }

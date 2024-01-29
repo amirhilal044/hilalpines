@@ -6,8 +6,8 @@ import { ProductsPackagesCartService } from '../shared/products-packages-cart.se
 
 
 @Component({
-  selector: 'app-packages-list',
-  templateUrl: './packages-list.component.html',
+  selector: 'app-offers-list',
+  templateUrl: './offers-list.component.html',
   styleUrls: ['../shared/product-package.component.scss', '../shared/product-package-two.component.scss'],
 })
 export class PackagesListComponent {
@@ -26,13 +26,8 @@ export class PackagesListComponent {
   }
 
 
-  redirectToProducts(): void {
-    this.router.navigate(['/products']);
-  }
 
-  redirectToCart(): void{
-    this.router.navigate(['/cart'])
-  }
+ 
 
   getSelectedQuantity(id:number) {
     return this.productpackagecartService.getSelectedQuantity(id)
@@ -53,14 +48,8 @@ export class PackagesListComponent {
     return this.productpackagecartService.getAllItems().length
   }
 
-  toggleShowDetails(packages:any):void{
-    this.packageDetails = packages
+  showDialog():void{
     this.showDetails = true
-  }
-
-  toggleCloseDetails():void{
-    this.packageDetails = null;
-    this.showDetails = false
   }
   
 }

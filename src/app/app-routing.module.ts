@@ -6,12 +6,11 @@ import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './items/cart/cart.component';
 import { CheckoutComponent } from './checkoutAndPay/checkout/checkout.component';
-import { PackagesListComponent } from './items/packages-list/packages-list.component';
-import { ProductListComponent } from './items/product-list/product-list.component';
 import { LoginComponent } from './admin/login/login.component';
 import { PackageUploadComponent } from './admin/package-upload/package-upload.component';
 import { ProductUploadComponent } from './admin/product-upload/product-upload.component';
 import { AllItemsComponent } from './admin/all-items/all-items.component';
+import { ItemsNavComponent } from './items/items-nav/items-nav.component';
 
 
 const routes: Routes = [
@@ -46,13 +45,10 @@ const routes: Routes = [
     component: AboutComponent,
   },
   {
-    path: 'products',
-    component: ProductListComponent,
+    path: 'items',
+    component: ItemsNavComponent
   },
-  {
-    path: 'packages',
-    component: PackagesListComponent
-  },
+
   {
     path: 'cart',
     component: CartComponent,

@@ -8,6 +8,7 @@
     >
       <p
         class="line-height-3 md:text-xl mt-3 md:mt-0 text-left md:text-justify mb-2"
+        style="color: white;"
       >
         Since 1970, we've been dedicated to providing premium Lebanese pine
         nuts. Our legacy now includes a variety of nuts like almonds, walnuts,
@@ -20,7 +21,7 @@
       <p-button
         type="button"
         label="SEE PRODUCTS"
-        [routerLink]="['/products']"
+        [routerLink]="['/items']"
       ></p-button>
     </div>
     <p-carousel
@@ -54,7 +55,7 @@
   </div>
 
   <div class="text-center mt-8">
-    <h2 class="text-5xl" style="color: #8CAB3E;">OUR HOT PACKAGES</h2>
+    <h2 class="text-5xl" style="color: #4caf50;">OUR HOT PACKAGES</h2>
     <div class="flex justify-content-center">
       <p class="sm:w-6 my-3 p-2 px-4 text-justify" style="color: black;">
         Introducing our "Hottest Packages" - a curated list of offers that are
@@ -102,13 +103,9 @@
       </div>
     </ng-template>
   </p-carousel>
-
-  <button
-    pButton
-    pRipple
-    type="button"
-    label="SHOP ALL PRODUCTS"
-    [routerLink]="['/products']"
-    class="p-button-outlined mt-3"
-  ></button>
+  <p-button
+  type="button"
+  label="BUY OFFERS"
+  [routerLink]="['/items']"
+></p-button>
 </section>

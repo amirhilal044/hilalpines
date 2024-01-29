@@ -31,14 +31,14 @@ import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './items/cart/cart.component';
 import { CheckoutComponent } from './checkoutAndPay/checkout/checkout.component';
-import { PackagesListComponent } from './items/packages-list/packages-list.component';
+import { PackagesListComponent } from './items/offers-list/offers-list.component';
 import { ProductListComponent } from './items/product-list/product-list.component';
 import { OrderInfoComponent } from './checkoutAndPay/order-info/order-info.component';
 import { LoginComponent } from './admin/login/login.component';
 import { ProductUploadComponent } from './admin/product-upload/product-upload.component';
 import { PackageUploadComponent } from './admin/package-upload/package-upload.component';
 import { AllItemsComponent } from './admin/all-items/all-items.component';
-import { ItemsListComponent } from './items/items-list/items-list.component';
+import { ItemsNavComponent } from './items/items-nav/items-nav.component';
 
 
 @NgModule({
@@ -57,7 +57,7 @@ import { ItemsListComponent } from './items/items-list/items-list.component';
     ProductUploadComponent,
     PackageUploadComponent,
     AllItemsComponent,
-    ItemsListComponent,
+    ItemsNavComponent,
   ],
   imports: [
     TabViewModule,

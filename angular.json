@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "chady": {
+    "amir": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/chady",
+            "outputPath": "dist/amir",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -27,8 +27,8 @@
             "styles": [
               "src/styles.scss",
               "node_modules/primeicons/primeicons.css",
-              "primeng/resources/themes/arya-green/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
+              "primeng/resources/themes/saga-green/theme.css",
               "node_modules/primeflex/primeflex.css"
             ],
             "scripts": []
@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "chady:build:production"
+              "browserTarget": "amir:build:production"
             },
             "development": {
-              "browserTarget": "chady:build:development"
+              "browserTarget": "amir:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "chady:build"
+            "browserTarget": "amir:build"
           }
         },
         "test": {

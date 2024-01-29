@@ -34,7 +34,7 @@ export class CartComponent implements OnInit {
   }
 
   closeCart(): void {
-    this.router.navigate(['/products']);
+    this.router.navigate(['/items']);
   }
 
   getAllItems() {
