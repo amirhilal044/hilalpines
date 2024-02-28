@@ -1,37 +1,37 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProductPackageDto } from '../shared/product-packages.dto';
-import { ProductsPackagesCartService } from '../shared/products-packages-cart.service';
+import { ItemsDto } from '../shared/items.dto';
+import { ItemsSevice } from '../shared/items.service';
+import { ProxyService } from './../../admin/shared/Proxy.service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['../shared/product-package.component.scss', '../shared/product-package-two.component.scss'],
+  styleUrls: ['../shared/items.component.scss'],
 })
 export class ProductListComponent {
   constructor(
     private router: Router,
-    private productspackagescartService: ProductsPackagesCartService
+    private productspackagescartService: ItemsSevice,
+    private proxyService: ProxyService,
   ) {}
-
-  products: any[] = [];
-  showDetails:boolean= false;
+  sanitizedImageUrl!: SafeUrl;
+  products: any[];
+  showDetails: boolean = false;
   productDetails: any;
   ngOnInit() {
-    console.log("before:" , this.products)
-    this.products = this.productspackagescartService.getProducts();
-    console.log("after:" , this.products)
-
+    this.proxyService.getAllItems().subscribe((items) => {
+      this.products = items.filter(item => item.type === 'product');
+    });
   }
-
-
 
   redirectToCart(): void {
     this.router.navigate(['/cart']);
   }
 
-  getSelectedQuantity(id:number) {
-    return this.productspackagescartService.getSelectedQuantity(id)/2
+  getSelectedQuantity(id: number) {
+    return this.productspackagescartService.getSelectedQuantity(id) / 2;
   }
 
   addToCart(product: any): void {
@@ -42,16 +42,18 @@ export class ProductListComponent {
     this.productspackagescartService.removeFromCart(product);
   }
 
-  isSelected(item: ProductPackageDto): boolean {
-    return this.productspackagescartService.getSelectedQuantity(item.id)>0;
+  isSelected(item: ItemsDto): boolean {
+    return this.productspackagescartService.getSelectedQuantity(item.id) > 0;
   }
 
-  getNumberOfCartItems(){
-    return this.productspackagescartService.getAllItems().length
+  getNumberOfCartItems() {
+    return this.productspackagescartService.getAllItems().length;
   }
-  
-  showDialog():void{
-    this.showDetails = true
+
+  showDialog(product: any) {
+    // First, hide all other dialogs
+    this.products.forEach(p => p.showDetails = false);
+    // Then, show the dialog for the clicked product
+    product.showDetails = true;
   }
-  
 }

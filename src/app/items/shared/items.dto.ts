@@ -1,10 +1,11 @@
+import { SafeUrl } from '@angular/platform-browser';
 // product.dto.ts
-export class ProductPackageDto {
+export class ItemsDto {
     id: number;
     name: string;
     price: number;
     description: string;
-    image_link: string;
+  // image: File;
+    image: string;
     type: string
   }
-  

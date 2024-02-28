@@ -1,36 +1,36 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProductPackageDto } from '../shared/product-packages.dto';
-import { ProductsPackagesCartService } from '../shared/products-packages-cart.service';
-
-
+import { ItemsDto } from '../shared/items.dto';
+import { ItemsSevice } from '../shared/items.service';
+import { ProxyService } from './../../admin/shared/Proxy.service';
 
 @Component({
   selector: 'app-offers-list',
   templateUrl: './offers-list.component.html',
-  styleUrls: ['../shared/product-package.component.scss', '../shared/product-package-two.component.scss'],
+  styleUrls: ['../shared/items.component.scss'],
 })
 export class PackagesListComponent {
-  constructor(private router: Router, private productpackagecartService:ProductsPackagesCartService) {}
-  packages :any = []
-  packageDetails: any
-  showDetails: boolean =false;
+  constructor(
+    private router: Router,
+    private proxyService: ProxyService,
+    private productpackagecartService: ItemsSevice
+  ) {}
+  packages: any[];
+  packageDetails: any;
+  showDetails: boolean = false;
 
-
-  ngOnInit(){
-    this.packages = this.productpackagecartService.getPackages()
+  ngOnInit() {
+    this.proxyService.getAllItems().subscribe((items) => {
+      this.packages = items.filter(item => item.type === 'offer');
+    });
   }
 
   countItemsWithId(items: number[], targetId: number): number {
-    return items.filter(item => item === targetId).length;
+    return items.filter((item) => item === targetId).length;
   }
 
-
-
- 
-
-  getSelectedQuantity(id:number) {
-    return this.productpackagecartService.getSelectedQuantity(id)
+  getSelectedQuantity(id: number) {
+    return this.productpackagecartService.getSelectedQuantity(id);
   }
 
   addToCart(product: any): void {
@@ -41,15 +41,17 @@ export class PackagesListComponent {
     this.productpackagecartService.removeFromCart(product);
   }
 
-  isSelected(item: ProductPackageDto): boolean {
-    return this.productpackagecartService.getSelectedQuantity(item.id)>0;
+  isSelected(item: ItemsDto): boolean {
+    return this.productpackagecartService.getSelectedQuantity(item.id) > 0;
   }
-  getNumberOfCartItems(){
-    return this.productpackagecartService.getAllItems().length
+  getNumberOfCartItems() {
+    return this.productpackagecartService.getAllItems().length;
   }
 
-  showDialog():void{
-    this.showDetails = true
+  showDialog(_package: any) {
+    // First, hide all other dialogs
+    this.packages.forEach(p => p.showDetails = false);
+    // Then, show the dialog for the clicked product
+    _package.showDetails = true;
   }
-  
 }

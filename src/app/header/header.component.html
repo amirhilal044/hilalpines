@@ -6,7 +6,7 @@
   </ng-template>
 
   <ng-template pTemplate="end">
-    <div class="flex-container">
+    <div class="flex flex-row align-items-center">
       <span *ngIf="getNumberOfCartItems() > 0" class="notification-badge">{{
         getNumberOfCartItems()
       }}</span>
@@ -15,13 +15,9 @@
         icon="pi pi-shopping-cart"
         [disabled]="getNumberOfCartItems() == 0"
         (click)="redirectToCart()"
-        style="margin-right: 8px"
-        [ngClass]="{ 'has-items': getNumberOfCartItems() > 0 }"
       ></p-button>
 
-      <p class="md:text-4xl md:mr-5 font-bold" style="color: #4caf50">
-        Hilal Pines
-      </p>
+      <p class="md:text-3xl md:mr-5 ml-3 font-bold text-primary">Hilal Pines</p>
     </div>
   </ng-template>
 </p-menubar>

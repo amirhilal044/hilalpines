@@ -8,7 +8,7 @@
     >
       <p
         class="line-height-3 md:text-xl mt-3 md:mt-0 text-left md:text-justify mb-2"
-        style="color: white;"
+        style="color: white"
       >
         Since 1970, we've been dedicated to providing premium Lebanese pine
         nuts. Our legacy now includes a variety of nuts like almonds, walnuts,
@@ -22,6 +22,7 @@
         type="button"
         label="SEE PRODUCTS"
         [routerLink]="['/items']"
+        class="text-primary"
       ></p-button>
     </div>
     <p-carousel
@@ -55,9 +56,9 @@
   </div>
 
   <div class="text-center mt-8">
-    <h2 class="text-5xl" style="color: #4caf50;">OUR HOT PACKAGES</h2>
+    <h2 class="text-5xl" class="text-primary">OUR HOT PACKAGES</h2>
     <div class="flex justify-content-center">
-      <p class="sm:w-6 my-3 p-2 px-4 text-justify" style="color: black;">
+      <p class="sm:w-6 my-3 p-2 px-4 text-justify" style="color: black">
         Introducing our "Hottest Packages" - a curated list of offers that are
         currently in high demand. These top selections have gained popularity
         due to their exceptional sales, special taste combination, and positive
@@ -66,7 +67,7 @@
     </div>
   </div>
   <!-- unitl i get all the offers done -->
-  
+
   <p-carousel
     [value]="packages"
     class="w-full"
@@ -79,7 +80,7 @@
   >
     <ng-template let-product pTemplate="item">
       <div class="product-item">
-        <div class="product-item-content ">
+        <div class="product-item-content">
           <div class="mb-3">
             <img
               [src]="'assets/images/OFFERS/' + product.image"
@@ -92,20 +93,14 @@
               <h4 class="mb-1">{{ product.name }}</h4>
               <h6 class="mt-0 mb-3 font-bold text-xl">${{ product.price }}</h6>
             </div>
-            <!-- <p-button
-              *ngIf="isLoggedIn"
-              icon="pi pi-trash"
-              styleClass="p-button-rounded"
-              (onClick)="onDelete(product)"
-            ></p-button> -->
           </div>
         </div>
       </div>
     </ng-template>
   </p-carousel>
   <p-button
-  type="button"
-  label="BUY OFFERS"
-  [routerLink]="['/items']"
-></p-button>
+    type="button"
+    label="BUY OFFERS"
+    [routerLink]="['/items']"
+  ></p-button>
 </section>

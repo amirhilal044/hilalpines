@@ -1,0 +1,93 @@
+<div class="grid p-4" [formGroup]="itemUploadForm">
+  <h2>Product/Offer upload</h2>
+  <div class="col-12 flex">
+    <div class="col-3 justify-content-end flex align-items-center">
+      <label for="name">Name:</label>
+    </div>
+    <div class="col-9 justify-content-start flex">
+      <input
+        class="col-6"
+        pInputText
+        id="name"
+        type="text"
+        formControlName="name"
+      />
+    </div>
+  </div>
+  <div class="col-12 flex">
+    <div class="col-3 justify-content-end flex align-items-center">
+      <label for="name">Price:</label>
+    </div>
+    <div class="col-9 justify-content-start flex">
+      <input
+        class="col-6"
+        pInputText
+        id="price"
+        type="number"
+        formControlName="price"
+      />
+    </div>
+  </div>
+  <div class="col-12 flex">
+    <div class="col-3 justify-content-end flex align-items-center">
+      <label for="name">Type:</label>
+    </div>
+    <div class="col-9 justify-content-start flex">
+      <p-dropdown
+        *ngIf="itemsTypes"
+        optionLabel="label"
+        optionValue="value"
+        [options]="itemsTypes"
+        formControlName="type"
+        placeholder="Select Type"
+      >
+      </p-dropdown>
+    </div>
+  </div>
+  <div class="col-12 flex">
+    <div class="col-3 justify-content-end flex align-items-center">
+      <label for="name">Description:</label>
+    </div>
+    <div class="col-9 justify-content-start flex">
+      <textarea
+        required="true"
+        class="col-10"
+        rows="5"
+        id="description"
+        cols="30"
+        pInputTextarea
+        [autoResize]="true"
+        formControlName="description"
+      ></textarea>
+    </div>
+  </div>
+  <div class="col-12 flex flex-column">
+      <div class="col-12 justify-content-start flex">
+        <p-fileUpload
+        p-fileupload-content=""
+          class="col-12"
+          chooseLabel="Image"
+          name="demo[]"
+          accept="image/*"
+          [showCancelButton]="true"
+          [showUploadButton]="false"
+          [multiple]="false"
+          [maxFileSize]="1000000"
+          (onSelect)="onSelectPicture($event)"
+        ></p-fileUpload>
+      </div>
+
+  </div>
+
+  <div class="col-12 flex">
+    <div class="col-3 justify-content-end flex align-items-center"></div>
+    <div class="col-6 justify-content-start flex">
+      <button
+        class="mt-2 w-6rem"
+        pButton
+        label="Submit"
+        (click)="submitItem()"
+      ></button>
+    </div>
+  </div>
+</div>

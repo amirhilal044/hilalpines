@@ -1,11 +1,11 @@
-import { TabViewModule } from 'primeng/tabview';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { TabViewModule } from 'primeng/tabview';
 
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { BadgeModule } from 'primeng/badge';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -26,21 +26,23 @@ import { AboutComponent } from './about/about.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 // import { CommonService } from './common.service';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ImageModule } from 'primeng/image';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ItemUploadComponent } from './admin/item-upload/item-upload.component';
+import { LoginComponent } from './admin/login/login.component';
+import { CheckoutComponent } from './checkoutAndPay/checkout/checkout.component';
+import { OrderInfoComponent } from './checkoutAndPay/order-info/order-info.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './items/cart/cart.component';
-import { CheckoutComponent } from './checkoutAndPay/checkout/checkout.component';
+import { ItemsNavComponent } from './items/items-nav/items-nav.component';
 import { PackagesListComponent } from './items/offers-list/offers-list.component';
 import { ProductListComponent } from './items/product-list/product-list.component';
-import { OrderInfoComponent } from './checkoutAndPay/order-info/order-info.component';
-import { LoginComponent } from './admin/login/login.component';
-import { ProductUploadComponent } from './admin/product-upload/product-upload.component';
-import { PackageUploadComponent } from './admin/package-upload/package-upload.component';
-import { AllItemsComponent } from './admin/all-items/all-items.component';
-import { ItemsNavComponent } from './items/items-nav/items-nav.component';
-
-
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,13 +56,14 @@ import { ItemsNavComponent } from './items/items-nav/items-nav.component';
     CheckoutComponent,
     OrderInfoComponent,
     LoginComponent,
-    ProductUploadComponent,
-    PackageUploadComponent,
-    AllItemsComponent,
     ItemsNavComponent,
+    ItemUploadComponent,
   ],
   imports: [
     TabViewModule,
+    ConfirmDialogModule,
+    ImageModule,
+    FileUploadModule,
     CardModule,
     InputNumberModule,
     GalleriaModule,
@@ -83,9 +86,12 @@ import { ItemsNavComponent } from './items/items-nav/items-nav.component';
     MenubarModule,
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    AvatarModule,
+    AvatarGroupModule,
+    BadgeModule,
+    InputTextareaModule,
   ],
-  providers: [MessageService, DialogService],
+  providers: [MessageService, DialogService, ConfirmationService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

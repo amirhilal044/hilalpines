@@ -1,33 +1,31 @@
 // cart.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProductPackageDto } from '../shared/product-packages.dto';
-import { ProductsPackagesCartService } from '../shared/products-packages-cart.service';
+import { ConfirmationService } from 'primeng/api';
+import { ItemsDto } from '../shared/items.dto';
+import { ItemsSevice } from '../shared/items.service';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss'], 
+  styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
   cartItems: any[] = [];
-  showConfirmationModal: boolean = false; 
-  showDetails: boolean =false;
+  showDetails: boolean = false;
 
   constructor(
-    private productpackagecartService: ProductsPackagesCartService,
+    private itemsService: ItemsSevice,
+    private confirmationService: ConfirmationService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.cartItems = this.productpackagecartService.getAllItems();
-    if (!this.cartItems || this.cartItems.length === 0) {
-      this.router.navigate(['/products']);
-    }
+    this.cartItems = this.itemsService.getAllItems();
   }
 
   ngDoCheck(): void {
-    this.cartItems = this.productpackagecartService.getAllItems();
+    this.cartItems = this.itemsService.getAllItems();
     if (!this.cartItems || this.cartItems.length === 0) {
       this.router.navigate(['/products']);
     }
@@ -45,40 +43,34 @@ export class CartComponent implements OnInit {
   }
 
   clearCart(): void {
-    this.showConfirmationModal = true;
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to clear cart?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => this.itemsService.clearCart(),
+      reject: () => {},
+    });
   }
-
 
   addToCart(item: any): void {
-    this.productpackagecartService.addToCart(item);
+    this.itemsService.addToCart(item);
   }
   removeFromCart(item: any): void {
-    this.productpackagecartService.removeFromCart(item);
-  }
-
-  confirmClearCart(): void {
-    this.productpackagecartService.clearCart();
-    this.showConfirmationModal = false; // Close the confirmation modal after clearing the cart
-  }
-
-  cancelClearCart(): void {
-    this.showConfirmationModal = false; // Close the confirmation modal without clearing the cart
+    this.itemsService.removeFromCart(item);
   }
 
   checkout(): void {
-   this.router.navigate(['/checkout'])
+    this.router.navigate(['/checkout']);
   }
-  isSelected(item: ProductPackageDto): boolean {
-    return this.productpackagecartService.getSelectedQuantity(item.id)>0;
-  }
-  toggleShowDetails():void{
-    this.showDetails = true
-  }
-  toggleCloseDetails():void{
-    this.showDetails = false
+  isSelected(item: ItemsDto): boolean {
+    return this.itemsService.getSelectedQuantity(item.id) > 0;
   }
 
-  getSelectedQuantity(id:number) {
-    return this.productpackagecartService.getSelectedQuantity(id)
+  getSelectedQuantity(id: number) {
+    return this.itemsService.getSelectedQuantity(id);
+  }
+
+  showDialog(): void {
+    this.showDetails = true;
   }
 }

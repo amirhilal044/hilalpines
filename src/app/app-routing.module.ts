@@ -2,16 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 
+import { ItemUploadComponent } from './admin/item-upload/item-upload.component';
+import { LoginComponent } from './admin/login/login.component';
+import { CheckoutComponent } from './checkoutAndPay/checkout/checkout.component';
 import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './items/cart/cart.component';
-import { CheckoutComponent } from './checkoutAndPay/checkout/checkout.component';
-import { LoginComponent } from './admin/login/login.component';
-import { PackageUploadComponent } from './admin/package-upload/package-upload.component';
-import { ProductUploadComponent } from './admin/product-upload/product-upload.component';
-import { AllItemsComponent } from './admin/all-items/all-items.component';
 import { ItemsNavComponent } from './items/items-nav/items-nav.component';
-
 
 const routes: Routes = [
   {
@@ -23,16 +20,8 @@ const routes: Routes = [
     // canActivate: [AuthGuardService],
     children: [
       {
-        path: 'offer-upload',
-        component: PackageUploadComponent,
-      },
-      {
-        path: 'product-upload',
-        component: ProductUploadComponent,
-      },
-      {
-        path: 'all-items',
-        component: AllItemsComponent,
+        path: 'item-upload',
+        component: ItemUploadComponent,
       },
     ],
   },
@@ -46,7 +35,7 @@ const routes: Routes = [
   },
   {
     path: 'items',
-    component: ItemsNavComponent
+    component: ItemsNavComponent,
   },
 
   {

@@ -7,11 +7,11 @@
     align-items: center;
     padding: 40px;
     margin-top: 0;
-  
+
     .social-button {
       background-color: #f7f7f7;
       padding: 10% 0; // Adjusted padding for better responsiveness
-      color: #4caf50;
+      color: #8CAB3E;
       border: none;
       border-radius: 15px;
       width: 100%;
@@ -24,29 +24,28 @@
       flex-direction: column; // Updated to a column layout for better responsiveness
       align-items: center;
       justify-content: center;
-  
+
       &:hover {
         transform: scale(1.01);
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
       }
-  
+
       img {
         max-width: 100%;
         max-height: 100%;
         border-radius: 15px;
       }
-  
+
     }
-  
+
     @media (max-width: 768px) {
       // Media query for smaller screens
       grid-template-columns: 1fr; // Switch to a single column layout on smaller screens
       gap: 10px;
-  
+
       .social-button {
         padding: 10% 0; // Adjusted padding for better responsiveness
         font-size: 16px; // Adjusted font size for better readability on smaller screens
       }
     }
   }
-  

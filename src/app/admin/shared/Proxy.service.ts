@@ -1,33 +1,50 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductPackageDto } from 'src/app/items/shared/product-packages.dto';
+import { ItemsDto } from 'src/app/items/shared/items.dto';
+import { environment } from 'src/environments/envonment.prod';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProxyService {
-  private baseUrl = 'http://localhost:3000'; // Replace with your backend API base URL
-
   constructor(private httpClient: HttpClient) {}
 
-  getAllProducts(): Observable<ProductPackageDto[]> {
-    return this.httpClient.get<ProductPackageDto[]>(`${this.baseUrl}/product`);
+  getAllItems(): Observable<ItemsDto[]> {
+    return this.httpClient.get<ItemsDto[]>(
+      `${environment.apiBaseUrl}/product`
+    );
   }
 
-  getProductById(id: number): Observable<ProductPackageDto> {
-    return this.httpClient.get<ProductPackageDto>(`${this.baseUrl}/product/${id}`);
+  getItemById(id: number): Observable<ItemsDto> {
+    return this.httpClient.get<ItemsDto>(
+      `${environment.apiBaseUrl}/product/${id}`
+    );
   }
 
-  createProduct(createProductDto: ProductPackageDto): Observable<ProductPackageDto> {
-    return this.httpClient.post<ProductPackageDto>(`${this.baseUrl}/product`, createProductDto);
+  createItem(
+    createItemDto: ItemsDto
+  ): Observable<ItemsDto> {
+    console.log(createItemDto)
+    return this.httpClient.post<ItemsDto>(
+      `${environment.apiBaseUrl}/product`,
+      createItemDto
+    );
   }
 
-  updateProduct(id: number, updateProductDto: ProductPackageDto): Observable<ProductPackageDto> {
-    return this.httpClient.put<ProductPackageDto>(`${this.baseUrl}/product/${id}`, updateProductDto);
+  updateIem(
+    id: number,
+    updateProductDto: ItemsDto
+  ): Observable<ItemsDto> {
+    return this.httpClient.put<ItemsDto>(
+      `${environment.apiBaseUrl}/product/${id}`,
+      updateProductDto
+    );
   }
 
-  deleteProduct(id: number): Observable<void> {
-    return this.httpClient.delete<void>(`${this.baseUrl}/product/${id}`);
+  deleteItem(id: number): Observable<void> {
+    return this.httpClient.delete<void>(
+      `${environment.apiBaseUrl}/product/${id}`
+    );
   }
 }
