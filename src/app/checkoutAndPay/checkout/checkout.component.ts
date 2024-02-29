@@ -9,13 +9,13 @@ import { ItemsSevice } from '../../items/shared/items.service';
 })
 export class CheckoutComponent {
   constructor(
-    private productpackagecartService: ItemsSevice,
+    private itemsService: ItemsSevice,
     private router: Router
   ) {}
   checkoutItems: any[] = [];
 
   ngOnInit(): void {
-    this.checkoutItems = this.productpackagecartService.getAllItems();
+    this.checkoutItems = this.itemsService.getAllItems();
     if (!this.checkoutItems || this.checkoutItems.length === 0) {
       this.router.navigate(['/cart']);
     }

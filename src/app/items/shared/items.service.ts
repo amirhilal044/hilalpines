@@ -1,32 +1,44 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { ItemsDto } from './items.dto';
+import { CookieService } from 'ngx-cookie-service';
+import { CartItemDto, ItemsDto } from './items.dto';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ItemsSevice {
-  cartItems: ItemsDto[] = [];
+  private cartItems: CartItemDto[] = [];
 
-  constructor(private router: Router) {}
-
-  addToCart(item: ItemsDto): void {
-    this.cartItems.push(item);
+  constructor(private router: Router, private cookieService: CookieService) {
+    this.initializeCartItemsFromCookies();
   }
 
-  removeFromCart(item: ItemsDto): void {
+  private initializeCartItemsFromCookies(): void {
+    const cartItemsCookie = this.cookieService.get('cartItems');
+    if (cartItemsCookie) {
+      this.cartItems = JSON.parse(cartItemsCookie);
+    }
+  }
+
+  addToCart(item: CartItemDto): void {
+    console.log(item)
+    this.cartItems.push(item);
+    this.updateCartItemsInCookies();
+  }
+
+  removeFromCart(id: number): void {
     const index = this.cartItems.findIndex(
-      (cartItem) => cartItem.id === item.id
+      (cartItem) => cartItem.id === id
     );
 
     if (index !== -1) {
       this.cartItems.splice(index, 1);
+      this.updateCartItemsInCookies();
     }
   }
 
   getSelectedQuantity(id: number): number {
-    const count = this.cartItems.filter((item) => item.id === id).length;
-    return count;
+    return this.cartItems.filter((item) => item.id === id).length;
   }
 
   getAllItems(): ItemsDto[] {
@@ -57,6 +69,11 @@ export class ItemsSevice {
 
   clearCart(): void {
     this.cartItems = [];
-    this.router.navigate(['/products']);
+    this.cookieService.delete('cartItems');
+    this.router.navigate(['/products']); // Ensure correct navigation
+  }
+
+  private updateCartItemsInCookies(): void {
+    this.cookieService.set('cartItems', JSON.stringify(this.cartItems));
   }
 }

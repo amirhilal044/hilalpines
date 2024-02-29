@@ -8,4 +8,15 @@ export class ItemsDto {
   // image: File;
     image: string;
     type: string
-  }
+}
+
+
+export class CartItemDto {
+  id: number;
+  name: string;
+  price: number;
+  // description: string;
+// image: File;
+  // image: string;
+  type: string
+}

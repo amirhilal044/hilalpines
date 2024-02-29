@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ItemsDto } from '../shared/items.dto';
+import { CartItemDto, ItemsDto } from '../shared/items.dto';
 import { ItemsSevice } from '../shared/items.service';
 import { ProxyService } from './../../admin/shared/Proxy.service';
 
@@ -13,7 +13,7 @@ export class PackagesListComponent {
   constructor(
     private router: Router,
     private proxyService: ProxyService,
-    private productpackagecartService: ItemsSevice
+    private itemsService: ItemsSevice
   ) {}
   packages: any[];
   packageDetails: any;
@@ -21,36 +21,41 @@ export class PackagesListComponent {
 
   ngOnInit() {
     this.proxyService.getAllItems().subscribe((items) => {
-      this.packages = items.filter(item => item.type === 'offer');
+      this.packages = items.filter((item) => item.type === 'offer');
     });
   }
 
-  countItemsWithId(items: number[], targetId: number): number {
-    return items.filter((item) => item === targetId).length;
-  }
-
   getSelectedQuantity(id: number) {
-    return this.productpackagecartService.getSelectedQuantity(id);
+    return this.itemsService.getSelectedQuantity(id);
   }
 
-  addToCart(product: any): void {
-    this.productpackagecartService.addToCart(product);
+  addToCart(item: ItemsDto): void {
+    // Create a new object without the image property
+    const _offer: CartItemDto = {
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      type: item.type,
+    };
+    this.itemsService.addToCart(_offer);
   }
 
-  removeFromCart(product: any): void {
-    this.productpackagecartService.removeFromCart(product);
+  removeFromCart(item: ItemsDto): void {
+    const id = item.id;
+
+    this.itemsService.removeFromCart(id);
   }
 
   isSelected(item: ItemsDto): boolean {
-    return this.productpackagecartService.getSelectedQuantity(item.id) > 0;
+    return this.itemsService.getSelectedQuantity(item.id) > 0;
   }
   getNumberOfCartItems() {
-    return this.productpackagecartService.getAllItems().length;
+    return this.itemsService.getAllItems().length;
   }
 
   showDialog(_package: any) {
     // First, hide all other dialogs
-    this.packages.forEach(p => p.showDetails = false);
+    this.packages.forEach((p) => (p.showDetails = false));
     // Then, show the dialog for the clicked product
     _package.showDetails = true;
   }
