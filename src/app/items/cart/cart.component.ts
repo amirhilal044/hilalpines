@@ -42,6 +42,14 @@ export class CartComponent implements OnInit {
     return parseFloat((item.price * item.quantity).toFixed(2));
   }
 
+  getTotalPrice() {
+    const totalPrice = this.cartItems.reduce((sum, item) => {
+      return sum + item.price * item.quantity;
+    }, 0);
+
+    return totalPrice.toFixed(2);
+  }
+
   clearCart(): void {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to clear cart?',
@@ -52,11 +60,12 @@ export class CartComponent implements OnInit {
     });
   }
 
-  addToCart(item: any): void {
+  addToCart(item: ItemsDto): void {
     this.itemsService.addToCart(item);
   }
   removeFromCart(item: any): void {
-    this.itemsService.removeFromCart(item);
+    const id = item.id
+    this.itemsService.removeFromCart(id);
   }
 
   checkout(): void {

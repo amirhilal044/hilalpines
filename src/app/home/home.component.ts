@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { ProxyService } from './../admin/shared/Proxy.service';
+import { ItemsSevice } from './../items/shared/items.service';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  packages: any = [{}];
+  offers: any = [];
+  products: any = [];
+
   responsiveOptions = [
     {
       breakpoint: '1024px',
@@ -28,7 +31,19 @@ export class HomeComponent {
 
   isLoggedIn: boolean = false;
 
-  constructor(private readonly httpClient: HttpClient) {}
+  constructor(
+    private readonly itemsService: ItemsSevice,
+    private readonly proxyService: ProxyService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.proxyService.getAllItems().subscribe((items) => {
+      this.offers = items.filter((item) => item.type === 'offer');
+      this.products = items.filter((item) => item.type === 'product');
+    });
+  }
+
+  navTab(navType:string): void{
+    this.itemsService.navTab = navType
+  }
 }

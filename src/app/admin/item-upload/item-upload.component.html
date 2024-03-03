@@ -62,21 +62,20 @@
     </div>
   </div>
   <div class="col-12 flex flex-column">
-      <div class="col-12 justify-content-start flex">
-        <p-fileUpload
+    <div class="col-12 justify-content-start flex">
+      <p-fileUpload
         p-fileupload-content=""
-          class="col-12"
-          chooseLabel="Image"
-          name="demo[]"
-          accept="image/*"
-          [showCancelButton]="true"
-          [showUploadButton]="false"
-          [multiple]="false"
-          [maxFileSize]="1000000"
-          (onSelect)="onSelectPicture($event)"
-        ></p-fileUpload>
-      </div>
-
+        class="col-12"
+        chooseLabel="Image"
+        name="demo[]"
+        accept="image/*"
+        [showCancelButton]="true"
+        [showUploadButton]="false"
+        [multiple]="false"
+        [maxFileSize]="1000000"
+        (onSelect)="onSelectPicture($event)"
+      ></p-fileUpload>
+    </div>
   </div>
 
   <div class="col-12 flex">
@@ -88,6 +87,38 @@
         label="Submit"
         (click)="submitItem()"
       ></button>
+    </div>
+  </div>
+
+  <div>
+    <div class="flex flex-row flex-wrap justify-content-between">
+      <div
+        class="product-card sm:w-full md:w-5 lg:w-5 xl:w-3 mb-3 border-solid border-primary-100 border-1 p-3 border-round-lg m-3"
+        *ngFor="let item of items"
+      >
+        <div class="flex flex-row">
+          <div class="w-4 h-4">
+            <img [src]="item.image" alt="{{ item.name }}" class="w-12" />
+          </div>
+          <div class="flex flex-column justify-content-between ml-3 w-8">
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.description }}</p>
+          </div>
+        </div>
+
+        <div class="flex justify-content-between mt-3">
+          <p class="price">{{ item.price }}$/kg</p>
+          <div>
+            <p-toast></p-toast>
+            <p-button
+              (click)="deleteItem(item)"
+              icon="pi pi-trash"
+              styleClass="p-button-danger"
+            ></p-button>
+          </div>
+        </div>
+      </div>
+      <p-confirmDialog></p-confirmDialog>
     </div>
   </div>
 </div>

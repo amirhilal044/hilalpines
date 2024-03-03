@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { ItemsDto } from 'src/app/items/shared/items.dto';
 import { environment } from 'src/environments/envonment.prod';
 
@@ -11,40 +11,41 @@ export class ProxyService {
   constructor(private httpClient: HttpClient) {}
 
   getAllItems(): Observable<ItemsDto[]> {
-    return this.httpClient.get<ItemsDto[]>(
-      `${environment.apiBaseUrl}/product`
-    );
+    return this.httpClient.get<ItemsDto[]>(`${environment.apiBaseUrl}/item`);
   }
 
-  getItemById(id: number): Observable<ItemsDto> {
+  getItemByName(name: string): Observable<ItemsDto> {
     return this.httpClient.get<ItemsDto>(
-      `${environment.apiBaseUrl}/product/${id}`
+      `${environment.apiBaseUrl}/item/${name}`
     );
   }
 
-  createItem(
-    createItemDto: ItemsDto
-  ): Observable<ItemsDto> {
-    console.log(createItemDto)
+  createItem(createItemDto: ItemsDto): Observable<ItemsDto> {
     return this.httpClient.post<ItemsDto>(
-      `${environment.apiBaseUrl}/product`,
+      `${environment.apiBaseUrl}/item`,
       createItemDto
     );
   }
 
-  updateIem(
-    id: number,
-    updateProductDto: ItemsDto
-  ): Observable<ItemsDto> {
-    return this.httpClient.put<ItemsDto>(
-      `${environment.apiBaseUrl}/product/${id}`,
-      updateProductDto
-    );
-  }
+  // updateIem(
+  //   id: number,
+  //   updateProductDto: ItemsDto
+  // ): Observable<ItemsDto> {
+  //   return this.httpClient.put<ItemsDto>(
+  //     `${environment.apiBaseUrl}/product/${id}`,
+  //     updateProductDto
+  //   );
+  // }
 
   deleteItem(id: number): Observable<void> {
-    return this.httpClient.delete<void>(
-      `${environment.apiBaseUrl}/product/${id}`
+    const url = `${environment.apiBaseUrl}/item/${id}`;
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this.httpClient.delete<void>(url, { headers }).pipe(
+      catchError((error) => {
+        console.error('Error deleting item:', error);
+        return throwError('Error deleting item. Please try again later.');
+      })
     );
   }
 }

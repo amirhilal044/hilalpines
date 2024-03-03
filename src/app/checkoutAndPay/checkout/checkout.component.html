@@ -1,33 +1,119 @@
 <div class="overlay" style="z-index: 98">
-  <div class="cart-container">
-    <div class="checkout-items">
+  <div class="cart-container p-3 overflow-auto">
+    <h3 class="mb-2 text-primary text-center">Invoice #{{invoiceNumber}}</h3>
+
+    <div class="checkout-items overflow-auto">
       <!-- Display each item in the cart with delete button -->
-      <div class="checkout-item">
-        <span>Name</span>
-        <span>Price</span>
-        <span>Quantity</span>
-        <span>Total</span>
+      <div class="flex justify-content-between mb-2">
+        <span class="flex-1 text-center">Name</span>
+        <span class="flex-1 text-center">Price</span>
+        <span class="flex-1 text-center">Quantity</span>
+        <span class="flex-1 text-center">Total</span>
       </div>
       <hr />
-      <div *ngFor="let item of getAllItems()" class="checkout-item">
-        <span>{{ item.name }}</span>
-        <span>${{ item.price }}</span>
-        <span>({{ item.quantity }})</span>
-        <span>${{ getSmallTotalPrice(item) }}</span>
+      <div
+        *ngFor="let item of getAllItems()"
+        class="flex justify-content-between mb-2"
+      >
+        <span class="flex-1 text-center">{{ item.name }}</span>
+        <span class="flex-1 text-center">${{ item.price }}</span>
+        <span class="flex-1 text-center">({{ item.quantity }})</span>
+        <span class="flex-1 text-center">${{ getSmallTotalPrice(item) }}</span>
       </div>
       <hr />
-      <div class="checkout-item">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span>${{ getTotalPrice() }}</span>
+      <div class="flex justify-content-between mb-2">
+        <span class="flex-1 text-center"></span>
+        <span class="flex-1 text-center"></span>
+        <span class="flex-1 text-center"></span>
+        <span class="flex-1 text-center">${{ getTotalPrice() }}</span>
       </div>
- 
+    </div>
 
-      <div class="checkout-item">
-        <button (click)="gotocart()">Back</button>
+    <div class="flex flex-column">
+      <h3 class="mb-2 text-primary">Order Information</h3>
+      <div class="formgrid grid" [formGroup]="orderInfo">
+        <div class="field col-12 md:col-6">
+          <label for="firstname6">Firstname</label>
+          <input
+            required
+            id="firstname6"
+            type="text"
+            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+            formControlName="firstName"
+          />
+        </div>
+        <div class="field col-12 md:col-6">
+          <label for="lastname6">Lastname</label>
+          <input
+            required
+            id="lastname6"
+            type="text"
+            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+            formControlName="lastName"
+          />
+        </div>
 
-        <button (click)="processPayment()">Proceed to Payment</button>
+        <div class="field col-12 md:col-4">
+          <label for="city">City</label>
+          <input
+            required
+            id="city"
+            type="text"
+            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+            formControlName="city"
+          />
+        </div>
+
+        <div class="field col-12 md:col-4">
+          <label for="phonenumber">Email</label>
+          <input
+            required
+            id="email"
+            type="email"
+            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+            formControlName="email"
+          />
+        </div>
+
+        <div class="field col-12 md:col-4">
+          <label for="phonenumber">Phone Number</label>
+          <input
+            required
+            id="phonenumber"
+            type="number"
+            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+            formControlName="phoneNumber"
+          />
+        </div>
+
+        <div class="field col-12">
+          <label for="address">Address</label>
+          <textarea
+            required
+            id="address"
+            type="text"
+            rows="4"
+            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+            formControlName="address"
+          ></textarea>
+        </div>
+      </div>
+      <div class="flex justify-content-between">
+        <p-button
+          icon="pi pi-chevron-left"
+          type="button"
+          label="Back to Cart"
+          (onClick)="backToCart()"
+        ></p-button>
+
+        <p-toast></p-toast>
+        <p-confirmDialog></p-confirmDialog>
+        <p-button
+          (click)="submitOrder()"
+          label="Confirm Order"
+          icon="pi pi-check"
+          styleClass="bg-blue-400 border-blue-400"
+        ></p-button>
       </div>
     </div>
   </div>

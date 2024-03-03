@@ -10,7 +10,7 @@ import { ItemsSevice } from '../items/shared/items.service';
 export class HeaderComponent {
   constructor(
     private router: Router,
-    private readonly productpackagecartService: ItemsSevice
+    private readonly itemsSevice: ItemsSevice
   ) {}
   items: MenuItem[] = [
     {
@@ -43,6 +43,6 @@ export class HeaderComponent {
     this.router.navigate(['/cart']);
   }
   getNumberOfCartItems() {
-    return this.productpackagecartService.getAllItems().length;
+    return this.itemsSevice.getAllItems().length;
   }
 }

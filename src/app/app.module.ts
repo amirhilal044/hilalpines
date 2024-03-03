@@ -34,7 +34,6 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ItemUploadComponent } from './admin/item-upload/item-upload.component';
 import { LoginComponent } from './admin/login/login.component';
 import { CheckoutComponent } from './checkoutAndPay/checkout/checkout.component';
-import { OrderInfoComponent } from './checkoutAndPay/order-info/order-info.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
@@ -54,7 +53,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     PackagesListComponent,
     CartComponent,
     CheckoutComponent,
-    OrderInfoComponent,
     LoginComponent,
     ItemsNavComponent,
     ItemUploadComponent,

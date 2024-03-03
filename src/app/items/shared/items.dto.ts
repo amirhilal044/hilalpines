@@ -18,5 +18,5 @@ export class CartItemDto {
   // description: string;
 // image: File;
   // image: string;
-  type: string
+  type: string;
 }

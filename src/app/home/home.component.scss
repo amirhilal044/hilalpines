@@ -1,7 +1,7 @@
 .product-item {
   .product-item-content {
     border: 1px solid var(--surface-d);
-    border-radius: 3px;
+    border-radius: 4px;
     margin: 0.3rem;
     text-align: center;
     padding: 2rem 0;
@@ -14,27 +14,7 @@
     background-color: #f8f8f88f;
   }
 
-  .item-dark {
-    border: 0px;
-    background-color: rgba(255, 255, 255, 0.14);
-    box-shadow: 0px 10px 40px rgba(17, 221, 34, 0.06);
-  }
-  .image-dark {
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-    background-color: rgba(29, 30, 30, 0.39);
-  }
-}
 
-
-
-:host ::ng-deep p-button {
-  margin: 10px;
-}
-
-
-:host ::ng-deep .p-button.p-component:hover {
-  background-color: #f3f1e6 !important;
-  color: #8CAB3E;
 }
 .homeImage {
   background-image: url(../../assets/images/PINEFOREST.jpg);

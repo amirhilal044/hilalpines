@@ -23,10 +23,11 @@
         label="SEE PRODUCTS"
         [routerLink]="['/items']"
         class="text-primary"
+        (onClick)="navTab('product')"
       ></p-button>
     </div>
     <p-carousel
-      [value]="packages"
+      [value]="products"
       class="w-9 md:w-3 my-2 md:my-8"
       [numVisible]="1"
       [numScroll]="1"
@@ -35,19 +36,21 @@
       [showNavigators]="false"
       [showIndicators]="false"
     >
-      <ng-template let-package pTemplate="item">
+      <ng-template let-product pTemplate="item">
         <div class="product-item">
           <div class="product-item-content">
             <div class="mb-3">
               <img
-                [src]="'assets/images/OFFERS/' + package.image"
-                [alt]="package.name"
+                [src]="product.image"
+                [alt]="product.name"
                 class="product-image"
               />
             </div>
             <div>
-              <h2 class="mt-5">{{ package.name }}</h2>
-              <h3 class="font-bold text-2xl">${{ package.price }}</h3>
+              <h2 class="mt-5 text-white">{{ product.name }}</h2>
+              <h3 class="text-xl text-white">
+                ${{ product.price }}
+              </h3>
             </div>
           </div>
         </div>
@@ -69,7 +72,7 @@
   <!-- unitl i get all the offers done -->
 
   <p-carousel
-    [value]="packages"
+    [value]="offers"
     class="w-full"
     [numVisible]="3"
     [numScroll]="1"
@@ -78,20 +81,20 @@
     [responsiveOptions]="responsiveOptions"
     [showNavigators]="false"
   >
-    <ng-template let-product pTemplate="item">
+    <ng-template let-offer pTemplate="item">
       <div class="product-item">
         <div class="product-item-content">
           <div class="mb-3">
             <img
-              [src]="'assets/images/OFFERS/' + product.image"
-              [alt]="product.name"
+              [src]="offer.image"
+              [alt]="offer.name"
               class="product-image image-dark"
             />
           </div>
           <div class="flex flex-row justify-content-around">
             <div>
-              <h4 class="mb-1">{{ product.name }}</h4>
-              <h6 class="mt-0 mb-3 font-bold text-xl">${{ product.price }}</h6>
+              <h4 class="mb-1">{{ offer.name }}</h4>
+              <h6 class="mt-0 mb-3 text-xl">${{ offer.price }}</h6>
             </div>
           </div>
         </div>
@@ -102,5 +105,6 @@
     type="button"
     label="BUY OFFERS"
     [routerLink]="['/items']"
+    (onClick)="navTab('offers')"
   ></p-button>
 </section>

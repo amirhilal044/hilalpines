@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SelectItem } from 'primeng/api';
-import { ProxyService } from '../shared/Proxy.service';
 import { Router } from '@angular/router';
+import { ConfirmationService, SelectItem } from 'primeng/api';
+import { catchError, of, tap } from 'rxjs';
+import { ItemsDto } from 'src/app/items/shared/items.dto';
+import { ProxyService } from '../shared/Proxy.service';
 
 @Component({
   selector: 'app-item-upload',
@@ -10,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./item-upload.component.scss'],
 })
 export class ItemUploadComponent implements OnInit {
+  items: ItemsDto[];
   itemUploadForm!: FormGroup;
   uploadedImage: any;
   itemsTypes: SelectItem[] = [];
@@ -18,6 +21,7 @@ export class ItemUploadComponent implements OnInit {
     private formBuilder: FormBuilder,
     private proxyService: ProxyService,
     private router: Router,
+    private confirmationService: ConfirmationService,
   ) {}
 
   ngOnInit() {
@@ -26,6 +30,10 @@ export class ItemUploadComponent implements OnInit {
     setTimeout(() => {
       this.initializeDropdownOptions();
     }, 100);
+
+    this.proxyService.getAllItems().subscribe((items) => {
+      this.items = items;
+    });
   }
 
   private initializeForm() {
@@ -70,5 +78,31 @@ export class ItemUploadComponent implements OnInit {
         alert('Upload failed');
       }
     );
+  }
+
+  deleteItem(item: ItemsDto) {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to delete item?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.proxyService
+          .deleteItem(item.id)
+          .pipe(
+            tap(() => {
+              window.location.reload()
+              this.router.navigate(['admin/item-upload'])
+            }),
+            catchError((error) => {
+              console.error('Error deleting item:', error);
+              // Handle error, show message to the user, etc.
+              alert('Error deleting item. Please try again later.');
+              return of(null); // Return observable to avoid breaking the chain
+            })
+          )
+          .subscribe();
+      },
+      reject: () => {},
+    });
   }
 }

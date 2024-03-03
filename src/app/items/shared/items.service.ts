@@ -8,6 +8,7 @@ import { CartItemDto, ItemsDto } from './items.dto';
 })
 export class ItemsSevice {
   private cartItems: CartItemDto[] = [];
+  navTab: string = '';
 
   constructor(private router: Router, private cookieService: CookieService) {
     this.initializeCartItemsFromCookies();
@@ -21,15 +22,12 @@ export class ItemsSevice {
   }
 
   addToCart(item: CartItemDto): void {
-    console.log(item)
     this.cartItems.push(item);
     this.updateCartItemsInCookies();
   }
 
   removeFromCart(id: number): void {
-    const index = this.cartItems.findIndex(
-      (cartItem) => cartItem.id === id
-    );
+    const index = this.cartItems.findIndex((cartItem) => cartItem.id === id);
 
     if (index !== -1) {
       this.cartItems.splice(index, 1);
@@ -74,6 +72,12 @@ export class ItemsSevice {
   }
 
   private updateCartItemsInCookies(): void {
-    this.cookieService.set('cartItems', JSON.stringify(this.cartItems));
+    const expirationDate = new Date();
+    expirationDate.setMinutes(expirationDate.getMinutes() + 10);
+    this.cookieService.set(
+      'cartItems',
+      JSON.stringify(this.aggregateItems(this.cartItems)),
+      expirationDate
+    );
   }
 }

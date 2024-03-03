@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ConfirmationService } from 'primeng/api';
 import { ItemsSevice } from '../../items/shared/items.service';
 
 @Component({
@@ -10,19 +12,35 @@ import { ItemsSevice } from '../../items/shared/items.service';
 export class CheckoutComponent {
   constructor(
     private itemsService: ItemsSevice,
-    private router: Router
+    private readonly formBuilder: FormBuilder,
+    private router: Router,
+    private confirmationService: ConfirmationService
   ) {}
-  checkoutItems: any[] = [];
+  itemsOrdered: any[] = [];
+  orderInfo: FormGroup;
+  invoiceNumber: number;
 
   ngOnInit(): void {
-    this.checkoutItems = this.itemsService.getAllItems();
-    if (!this.checkoutItems || this.checkoutItems.length === 0) {
+    this.itemsOrdered = this.itemsService.getAllItems();
+    if (!this.itemsOrdered || this.itemsOrdered.length === 0) {
       this.router.navigate(['/cart']);
     }
+    this.createForm();
+    // Check if the invoice number exists in localStorage
+    const storedInvoiceNumber = localStorage.getItem('invoiceNumber');
+
+    storedInvoiceNumber
+      ? (this.invoiceNumber = parseInt(storedInvoiceNumber, 10))
+      : this.generateInvoiceNumber();
+  }
+
+  generateInvoiceNumber(): void {
+    this.invoiceNumber = Math.floor(1000 + Math.random() * 9000);
+    localStorage.setItem('invoiceNumber', this.invoiceNumber.toString());
   }
 
   getAllItems() {
-    return this.checkoutItems;
+    return this.itemsOrdered;
   }
 
   getSmallTotalPrice(item: any) {
@@ -30,14 +48,47 @@ export class CheckoutComponent {
   }
 
   getTotalPrice() {
-    const totalPrice = this.checkoutItems.reduce((sum, item) => {
+    const totalPrice = this.itemsOrdered.reduce((sum, item) => {
       return sum + item.price * item.quantity;
     }, 0);
 
     return totalPrice.toFixed(2);
   }
-  gotocart(): void {
+  backToCart(): void {
     this.router.navigate(['/cart']);
   }
-  processPayment(): void {}
+
+  createForm() {
+    this.orderInfo = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+      city: ['', Validators.required],
+      address: ['', Validators.required],
+      email: ['', [Validators.email, Validators.required]], // Removed extra parameter
+    });
+  }
+
+  submitOrder(): void {
+    this.confirmationService.confirm({
+      message: 'Confirm Order',
+      header: 'Confirmation',
+      icon: 'pi pi-check',
+      accept: () => {
+        const order = {
+          items: this.itemsOrdered,
+          orderInfo: this.orderInfo.value,
+        };
+        localStorage.removeItem('invoiceNumber');
+        // Now you can proceed with the order submission using the 'order' object
+        console.log(order);
+      },
+      reject: () => {},
+    });
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  beforeunloadHandler(event: Event) {
+    localStorage.removeItem('invoiceNumber');
+  }
 }
