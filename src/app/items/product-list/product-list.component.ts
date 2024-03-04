@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartItemDto, ItemsDto } from '../shared/items.dto';
-import { ItemsSevice } from '../shared/items.service';
+import { ItemsService } from '../shared/items.service';
 import { ProxyService } from './../../admin/shared/Proxy.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { ProxyService } from './../../admin/shared/Proxy.service';
 export class ProductListComponent {
   constructor(
     private router: Router,
-    private itemsService: ItemsSevice,
+    private itemsService: ItemsService,
     private proxyService: ProxyService
   ) {}
   products: any[];
@@ -25,24 +25,26 @@ export class ProductListComponent {
   }
 
   getSelectedQuantity(id: number) {
-    return this.itemsService.getSelectedQuantity(id) / 2;
+    return this.itemsService.getSelectedQuantity(id);
   }
 
   addToCart(item: ItemsDto): void {
     // Create a new object without the image property
+    console.log(item)
     const _product: CartItemDto = {
       id: item.id,
       name: item.name,
       price: item.price,
       type: item.type,
+      quantity: 0.5
     };
     this.itemsService.addToCart(_product);
   }
 
   removeFromCart(item: ItemsDto): void {
     const id = item.id;
-
-    this.itemsService.removeFromCart(id);
+    const type = item.type
+    this.itemsService.removeFromCart(id,type);
   }
 
   isSelected(item: ItemsDto): boolean {

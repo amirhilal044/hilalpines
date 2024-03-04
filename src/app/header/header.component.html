@@ -7,13 +7,13 @@
 
   <ng-template pTemplate="end">
     <div class="flex flex-row align-items-center">
-      <span *ngIf="getNumberOfCartItems() > 0" class="notification-badge">{{
-        getNumberOfCartItems()
+      <span *ngIf="numberOfCartItems > 0" class="notification-badge">{{
+        numberOfCartItems
       }}</span>
 
       <p-button
         icon="pi pi-shopping-cart"
-        [disabled]="getNumberOfCartItems() == 0"
+        [disabled]="numberOfCartItems == 0"
         (click)="redirectToCart()"
       ></p-button>
 

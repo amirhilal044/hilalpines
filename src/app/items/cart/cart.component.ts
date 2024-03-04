@@ -2,8 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
-import { ItemsDto } from '../shared/items.dto';
-import { ItemsSevice } from '../shared/items.service';
+import { CartItemDto, ItemsDto } from '../shared/items.dto';
+import { ItemsService } from '../shared/items.service';
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +15,7 @@ export class CartComponent implements OnInit {
   showDetails: boolean = false;
 
   constructor(
-    private itemsService: ItemsSevice,
+    private itemsService: ItemsService,
     private confirmationService: ConfirmationService,
     private router: Router
   ) {}
@@ -61,11 +61,27 @@ export class CartComponent implements OnInit {
   }
 
   addToCart(item: ItemsDto): void {
-    this.itemsService.addToCart(item);
+
+    let _quan = 0;
+    if (item.type === 'offer') {
+      _quan = 1;
+    } else if (item.type === 'product') {
+      _quan = 0.5;
+    }
+    const _offer: CartItemDto = {
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      type: item.type,
+      quantity: _quan
+    };
+    this.itemsService.addToCart(_offer);
   }
+
   removeFromCart(item: any): void {
-    const id = item.id
-    this.itemsService.removeFromCart(id);
+    const id = item.id;
+    const type = item.type
+    this.itemsService.removeFromCart(id,type);
   }
 
   checkout(): void {

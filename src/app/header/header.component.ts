@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
-import { ItemsSevice } from '../items/shared/items.service';
+import { ItemsService } from '../items/shared/items.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+  numberOfCartItems:number = 0
   constructor(
     private router: Router,
-    private readonly itemsSevice: ItemsSevice
+    private readonly ItemsService: ItemsService
   ) {}
   items: MenuItem[] = [
     {
@@ -38,11 +39,17 @@ export class HeaderComponent {
       styleClass: 'bold-label',
     },
   ];
+  ngOnInit() {
+    this.numberOfCartItems = this.getNumberOfCartItems()
+  }
 
+  ngDoCheck() {
+    this.numberOfCartItems = this.getNumberOfCartItems()
+  }
   redirectToCart(): void {
     this.router.navigate(['/cart']);
   }
   getNumberOfCartItems() {
-    return this.itemsSevice.getAllItems().length;
+    return this.ItemsService.getAllItems().length;
   }
 }

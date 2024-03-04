@@ -68,17 +68,25 @@ export class ItemUploadComponent implements OnInit {
   }
 
   submitItem() {
+    // Check if the form is valid
+    if (this.itemUploadForm.invalid) {
+      alert('Please fill out all the fields in the form.');
+      return;
+    }
+
     const newItem = this.itemUploadForm.value;
-    this.proxyService.createItem(newItem).subscribe(
-      () => {
+    this.proxyService.createItem(newItem).pipe(
+      tap(() => {
         this.router.navigate(['home-page']);
-      },
-      (error) => {
+      }),
+      catchError(error => {
         console.error('Upload failed:', error);
         alert('Upload failed');
-      }
-    );
-  }
+        return of(null);
+      })
+    ).subscribe();
+}
+
 
   deleteItem(item: ItemsDto) {
     this.confirmationService.confirm({

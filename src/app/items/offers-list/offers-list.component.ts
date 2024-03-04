@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartItemDto, ItemsDto } from '../shared/items.dto';
-import { ItemsSevice } from '../shared/items.service';
+import { ItemsService } from '../shared/items.service';
 import { ProxyService } from './../../admin/shared/Proxy.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class PackagesListComponent {
   constructor(
     private router: Router,
     private proxyService: ProxyService,
-    private itemsService: ItemsSevice
+    private itemsService: ItemsService
   ) {}
   packages: any[];
   packageDetails: any;
@@ -36,14 +36,15 @@ export class PackagesListComponent {
       name: item.name,
       price: item.price,
       type: item.type,
+      quantity: 1
     };
     this.itemsService.addToCart(_offer);
   }
 
   removeFromCart(item: ItemsDto): void {
     const id = item.id;
-
-    this.itemsService.removeFromCart(id);
+    const type = item.type
+    this.itemsService.removeFromCart(id,type);
   }
 
   isSelected(item: ItemsDto): boolean {

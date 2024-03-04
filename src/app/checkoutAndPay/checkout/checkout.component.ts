@@ -2,7 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
-import { ItemsSevice } from '../../items/shared/items.service';
+import { ItemsService } from '../../items/shared/items.service';
 
 @Component({
   selector: 'app-checkout',
@@ -11,7 +11,7 @@ import { ItemsSevice } from '../../items/shared/items.service';
 })
 export class CheckoutComponent {
   constructor(
-    private itemsService: ItemsSevice,
+    private itemsService: ItemsService,
     private readonly formBuilder: FormBuilder,
     private router: Router,
     private confirmationService: ConfirmationService
@@ -70,13 +70,21 @@ export class CheckoutComponent {
   }
 
   submitOrder(): void {
+    if (this.orderInfo.invalid) {
+      alert('Please fill out all the fields in the order information form.');
+      return;
+    }
     this.confirmationService.confirm({
       message: 'Confirm Order',
       header: 'Confirmation',
       icon: 'pi pi-check',
       accept: () => {
         const order = {
-          items: this.itemsOrdered,
+          items: this.itemsOrdered.map((item) => ({
+            ...item,
+            smallTotalPrice: this.getSmallTotalPrice(item),
+          })),
+          grandTotal: this.getTotalPrice(),
           orderInfo: this.orderInfo.value,
         };
         localStorage.removeItem('invoiceNumber');

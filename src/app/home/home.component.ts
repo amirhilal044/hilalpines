@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ProxyService } from './../admin/shared/Proxy.service';
-import { ItemsSevice } from './../items/shared/items.service';
+import { ItemsService } from './../items/shared/items.service';
 
 @Component({
   selector: 'app-home',
@@ -32,7 +32,7 @@ export class HomeComponent {
   isLoggedIn: boolean = false;
 
   constructor(
-    private readonly itemsService: ItemsSevice,
+    private readonly itemsService: ItemsService,
     private readonly proxyService: ProxyService
   ) {}
 

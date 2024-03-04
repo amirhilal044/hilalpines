@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
         CryptoJS.enc.Hex
       );
 
+
       this.loginService.validateUser(hashedUsername,hashedPassword)
 
       if (sessionStorage.getItem('currentUser')) {
