@@ -105,4 +105,9 @@ export class ItemUploadComponent implements OnInit {
       reject: () => {},
     });
   }
+
+  logout() {
+    sessionStorage.removeItem('currentUser')
+    this.router.navigate(['admin/login'])
+  }
 }

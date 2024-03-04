@@ -4,6 +4,7 @@ import { AboutComponent } from './about/about.component';
 
 import { ItemUploadComponent } from './admin/item-upload/item-upload.component';
 import { LoginComponent } from './admin/login/login.component';
+import { AuthGuard } from './admin/shared/auth.guard';
 import { CheckoutComponent } from './checkoutAndPay/checkout/checkout.component';
 import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
@@ -17,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    // canActivate: [AuthGuardService],
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'item-upload',

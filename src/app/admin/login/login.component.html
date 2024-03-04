@@ -1,1 +1,30 @@
-<p>login works!</p>
+<div class="p-4" [formGroup]="loginForm">
+  <div class="field grid">
+    <label for="username" class="col-fixed" style="width: 100px"
+      >Username</label
+    >
+    <div class="col">
+      <input
+        id="username"
+        type="text"
+        class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary"
+        formControlName="username"
+      />
+    </div>
+  </div>
+  <div class="field grid">
+    <label for="password" class="col-fixed" style="width: 100px"
+      >Password</label
+    >
+    <div class="col">
+      <input
+        id="password"
+        type="password"
+        class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary"
+        formControlName="password"
+      />
+    </div>
+  </div>
+
+  <button pButton label="login" (click)="login()"></button>
+</div>
