@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
-import { ItemsDto } from 'src/app/items/shared/items.dto';
+import { ItemType, ItemsDto } from 'src/app/items/shared/items.dto';
 import { environment } from 'src/environments/envonment.prod';
 
 @Injectable({
@@ -46,6 +46,18 @@ export class ProxyService {
         console.error('Error deleting item:', error);
         return throwError('Error deleting item. Please try again later.');
       })
+    );
+  }
+
+  addType(type: string): Observable<ItemType> {
+    return this.httpClient.post<ItemType>(
+      `${environment.apiBaseUrl}/items-type`,
+      type
+    );
+  }
+  getAllTypes(): Observable<ItemType[]> {
+    return this.httpClient.get<ItemType[]>(
+      `${environment.apiBaseUrl}/items-type`
     );
   }
 }

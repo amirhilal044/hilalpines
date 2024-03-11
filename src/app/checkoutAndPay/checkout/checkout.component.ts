@@ -2,7 +2,8 @@ import { Component, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
-import { ItemsService } from '../../items/shared/items.service';
+import { OrdersService } from './../../items/shared/orders.service';
+import { CartService } from 'src/app/items/shared/cart.service';
 
 @Component({
   selector: 'app-checkout',
@@ -11,17 +12,18 @@ import { ItemsService } from '../../items/shared/items.service';
 })
 export class CheckoutComponent {
   constructor(
-    private itemsService: ItemsService,
+    private cartService: CartService,
     private readonly formBuilder: FormBuilder,
     private router: Router,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private ordersService: OrdersService
   ) {}
   itemsOrdered: any[] = [];
   orderInfo: FormGroup;
   invoiceNumber: number;
 
   ngOnInit(): void {
-    this.itemsOrdered = this.itemsService.getAllItems();
+    this.itemsOrdered = this.cartService.getAllItems();
     if (!this.itemsOrdered || this.itemsOrdered.length === 0) {
       this.router.navigate(['/cart']);
     }
@@ -86,10 +88,11 @@ export class CheckoutComponent {
           })),
           grandTotal: this.getTotalPrice(),
           orderInfo: this.orderInfo.value,
+          date: new Date().toISOString(),
         };
         localStorage.removeItem('invoiceNumber');
-        // Now you can proceed with the order submission using the 'order' object
-        console.log(order);
+
+        this.ordersService.placeOrder(order);
       },
       reject: () => {},
     });

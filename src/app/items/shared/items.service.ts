@@ -1,95 +1,56 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
-import { CartItemDto, ItemsDto } from './items.dto';
+import { Observable, of, tap } from 'rxjs';
+import { ProxyService } from 'src/app/admin/shared/Proxy.service';
+import { ItemType, ItemsDto } from './items.dto';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ItemsService {
-  private cartItems: CartItemDto[] = [];
-  navTab: string = '';
-
-  constructor(private router: Router, private cookieService: CookieService) {}
-
-  ngOnInit() {
-    const cartItemsString = this.cookieService.get('cartItems');
-    if (cartItemsString) {
-      this.cartItems = JSON.parse(cartItemsString);
-    }
+  private items: ItemsDto[] = [];
+  private itemsCacheKey = 'cached_items';
+  private typesCacheKey = 'cached_types';
+  itemsTypes: ItemType[];
+  constructor(private router: Router, private proxyService: ProxyService) {
+    // Register the beforeunload event handler
+    window.addEventListener('beforeunload', () => {
+      this.clearCache();
+    });
   }
-  addToCart(item: CartItemDto): void {
-    const cartItemsString = this.cookieService.get('cartItems');
-    if (cartItemsString) {
-      this.cartItems = JSON.parse(cartItemsString);
-    }
-    const existingItem = this.cartItems.find(
-      (cartItem) => cartItem.id === item.id
-    );
-    if (existingItem) {
-      existingItem.quantity += item.quantity;
+
+  getAllItems(): Observable<ItemsDto[]> {
+    const cachedItems = sessionStorage.getItem(this.itemsCacheKey);
+    if (cachedItems) {
+      this.items = JSON.parse(cachedItems);
+      return of(this.items); // Return cached items as observable
     } else {
-      this.cartItems.push(item);
-    }
-
-    this.updateCartItemsInCookies();
-  }
-
-  removeFromCart(id: number, type: string): void {
-    const cartItemsString = this.cookieService.get('cartItems');
-    if (cartItemsString) {
-      this.cartItems = JSON.parse(cartItemsString);
-    }
-    const index = this.cartItems.findIndex((cartItem) => cartItem.id === id);
-    if (index !== -1) {
-      if (type === 'product') {
-        this.cartItems[index].quantity -= 0.5;
-      } else if (type === 'offer') {
-
-        this.cartItems[index].quantity -= 1;
-      }
-
-      if (this.cartItems[index].quantity <= 0) {
-        this.cartItems.splice(index, 1);
-      }
-
-      this.updateCartItemsInCookies();
+      return this.proxyService.getAllItems().pipe(
+        // Cache items in sessionStorage before returning
+        tap((items) =>
+          sessionStorage.setItem(this.itemsCacheKey, JSON.stringify(items))
+        )
+      );
     }
   }
 
-  getSelectedQuantity(id: number): number {
-    const cartItemsString = this.cookieService.get('cartItems');
-    if (!cartItemsString) {
-      return 0;
+  getAllTypes(): Observable<ItemType[]> {
+    const cachedTypes = sessionStorage.getItem(this.typesCacheKey);
+    console.log(cachedTypes);
+    if (cachedTypes) {
+      this.itemsTypes = JSON.parse(cachedTypes);
+      return of(this.itemsTypes); // Return cached items as observable
+    } else {
+      return this.proxyService.getAllTypes().pipe(
+        // Cache items in sessionStorage before returning
+        tap((types) =>
+          sessionStorage.setItem(this.typesCacheKey, JSON.stringify(types))
+        )
+      );
     }
-
-    const cartItems: CartItemDto[] = JSON.parse(cartItemsString);
-    const selectedItem = cartItems.find((item) => item.id === id);
-    return selectedItem ? selectedItem.quantity : 0;
   }
-
-  getAllItems(): CartItemDto[] {
-    const cartItemsString = this.cookieService.get('cartItems');
-    if (!cartItemsString) {
-      return []; // Return an empty array if cartItems cookie is not set
-    }
-
-    return JSON.parse(cartItemsString);
-  }
-
-  clearCart(): void {
-    this.cartItems = [];
-    this.cookieService.delete('cartItems');
-    this.router.navigate(['/products']); // Ensure correct navigation
-  }
-
-  private updateCartItemsInCookies(): void {
-    const expirationDate = new Date();
-    expirationDate.setMinutes(expirationDate.getMinutes() + 10);
-    this.cookieService.set(
-      'cartItems',
-      JSON.stringify(this.cartItems),
-      expirationDate
-    );
+  clearCache() {
+    sessionStorage.removeItem(this.itemsCacheKey);
+    sessionStorage.removeItem(this.typesCacheKey);
   }
 }

@@ -1,0 +1,14 @@
+<div class="p-4" [formGroup]="typeForm">
+  <div class="field grid">
+    <label class="col-fixed" style="width: 100px">New Item Type</label>
+    <div class="col">
+      <input
+        type="text"
+        class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary"
+        formControlName="type"
+      />
+    </div>
+  </div>
+
+  <button pButton label="add" (click)="addType()"></button>
+</div>

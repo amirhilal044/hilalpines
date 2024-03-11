@@ -13,7 +13,7 @@ export const AuthGuard: CanActivateChildFn = (
   const router:Router = inject(Router)
   if (state.url.includes('/admin/item-upload')) {
     if (!sessionStorage.getItem('currentUser')) {
-      router.navigate(['/home']);
+      router.navigate(['/admin/login']);
       return false
     }
   }

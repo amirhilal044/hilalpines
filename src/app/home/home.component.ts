@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import { CartService } from '../items/shared/cart.service';
 import { ProxyService } from './../admin/shared/Proxy.service';
-import { ItemsService } from './../items/shared/items.service';
+import { ItemsService } from '../items/shared/items.service';
 
 @Component({
   selector: 'app-home',
@@ -31,19 +32,12 @@ export class HomeComponent {
 
   isLoggedIn: boolean = false;
 
-  constructor(
-    private readonly itemsService: ItemsService,
-    private readonly proxyService: ProxyService
-  ) {}
+  constructor(private readonly itemsService: ItemsService) {}
 
   ngOnInit(): void {
-    this.proxyService.getAllItems().subscribe((items) => {
-      this.offers = items.filter((item) => item.type === 'offer');
-      this.products = items.filter((item) => item.type === 'product');
+    this.itemsService.getAllItems().subscribe((items) => {
+      this.offers = items.filter((item) => item.type.type === 'offer');
+      this.products = items.filter((item) => item.type.type === 'product');
     });
-  }
-
-  navTab(navType:string): void{
-    this.itemsService.navTab = navType
   }
 }

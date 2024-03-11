@@ -4,12 +4,14 @@ import { AboutComponent } from './about/about.component';
 
 import { ItemUploadComponent } from './admin/item-upload/item-upload.component';
 import { LoginComponent } from './admin/login/login.component';
+import { OrdersHistoryComponent } from './admin/orders-history/orders-history.component';
 import { AuthGuard } from './admin/shared/auth.guard';
 import { CheckoutComponent } from './checkoutAndPay/checkout/checkout.component';
 import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './items/cart/cart.component';
-import { ItemsNavComponent } from './items/items-nav/items-nav.component';
+import { ItemsComponent } from './items/items/items.component';
+import { AddTypeComponent } from './admin/add-type/add-type.component';
 
 const routes: Routes = [
   {
@@ -20,10 +22,18 @@ const routes: Routes = [
     path: 'admin',
     canActivate: [AuthGuard],
     children: [
+
       {
         path: 'item-upload',
         component: ItemUploadComponent,
       },
+      {
+        path: 'orders-history',
+        component: OrdersHistoryComponent,
+      }, {
+        path: 'add-type',
+        component: AddTypeComponent
+      }
     ],
   },
   {
@@ -36,7 +46,7 @@ const routes: Routes = [
   },
   {
     path: 'items',
-    component: ItemsNavComponent,
+    component: ItemsComponent,
   },
 
   {

@@ -3,13 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfirmationService, SelectItem } from 'primeng/api';
 import { catchError, of, tap } from 'rxjs';
-import { ItemsDto } from 'src/app/items/shared/items.dto';
+import { ItemType, ItemsDto } from 'src/app/items/shared/items.dto';
 import { ProxyService } from '../shared/Proxy.service';
 
 @Component({
   selector: 'app-item-upload',
   templateUrl: './item-upload.component.html',
-  styleUrls: ['./item-upload.component.scss'],
 })
 export class ItemUploadComponent implements OnInit {
   items: ItemsDto[];
@@ -36,6 +35,14 @@ export class ItemUploadComponent implements OnInit {
     });
   }
 
+
+  private initializeDropdownOptions() {
+    this.proxyService.getAllTypes().subscribe((types: ItemType[]) => {
+      this.itemsTypes = types.map(type => ({ label: type.type, value: type.type }));
+    });
+  }
+
+
   private initializeForm() {
     this.itemUploadForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -46,12 +53,6 @@ export class ItemUploadComponent implements OnInit {
     });
   }
 
-  private initializeDropdownOptions() {
-    this.itemsTypes = [
-      { label: 'Product', value: 'product' },
-      { label: 'Offer', value: 'offer' },
-    ];
-  }
   onSelectPicture(event: any) {
     if (event.files.length > 0) {
       const file: File = event.files[0];
@@ -117,5 +118,10 @@ export class ItemUploadComponent implements OnInit {
   logout() {
     sessionStorage.removeItem('currentUser')
     this.router.navigate(['admin/login'])
+  }
+
+  gotoaddtype() {
+    this.router.navigate(['admin/add-type']);
+
   }
 }

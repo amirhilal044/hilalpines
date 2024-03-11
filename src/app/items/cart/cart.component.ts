@@ -2,8 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
+import { CartService } from '../shared/cart.service';
 import { CartItemDto, ItemsDto } from '../shared/items.dto';
-import { ItemsService } from '../shared/items.service';
 
 @Component({
   selector: 'app-cart',
@@ -15,17 +15,17 @@ export class CartComponent implements OnInit {
   showDetails: boolean = false;
 
   constructor(
-    private itemsService: ItemsService,
+    private cartService: CartService,
     private confirmationService: ConfirmationService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.cartItems = this.itemsService.getAllItems();
+    this.cartItems = this.cartService.getAllItems();
   }
 
   ngDoCheck(): void {
-    this.cartItems = this.itemsService.getAllItems();
+    this.cartItems = this.cartService.getAllItems();
     if (!this.cartItems || this.cartItems.length === 0) {
       this.router.navigate(['/products']);
     }
@@ -55,13 +55,12 @@ export class CartComponent implements OnInit {
       message: 'Are you sure that you want to clear cart?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
-      accept: () => this.itemsService.clearCart(),
+      accept: () => this.cartService.clearCart(),
       reject: () => {},
     });
   }
 
-  addToCart(item: ItemsDto): void {
-
+  addToCart(item: any): void {
     let _quan = 0;
     if (item.type === 'offer') {
       _quan = 1;
@@ -72,27 +71,27 @@ export class CartComponent implements OnInit {
       id: item.id,
       name: item.name,
       price: item.price,
-      type: item.type,
-      quantity: _quan
+      type: item.type.type,
+      quantity: _quan,
     };
-    this.itemsService.addToCart(_offer);
+    this.cartService.addToCart(_offer);
   }
 
   removeFromCart(item: any): void {
     const id = item.id;
-    const type = item.type
-    this.itemsService.removeFromCart(id,type);
+    const type = item.type;
+    this.cartService.removeFromCart(id, type);
   }
 
   checkout(): void {
     this.router.navigate(['/checkout']);
   }
   isSelected(item: ItemsDto): boolean {
-    return this.itemsService.getSelectedQuantity(item.id) > 0;
+    return this.cartService.getSelectedQuantity(item.id) > 0;
   }
 
   getSelectedQuantity(id: number) {
-    return this.itemsService.getSelectedQuantity(id);
+    return this.cartService.getSelectedQuantity(id);
   }
 
   showDialog(): void {

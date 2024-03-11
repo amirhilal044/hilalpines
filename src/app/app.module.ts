@@ -28,20 +28,21 @@ import { AppComponent } from './app.component';
 // import { CommonService } from './common.service';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ImageModule } from 'primeng/image';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ItemUploadComponent } from './admin/item-upload/item-upload.component';
 import { LoginComponent } from './admin/login/login.component';
+import { OrdersHistoryComponent } from './admin/orders-history/orders-history.component';
 import { CheckoutComponent } from './checkoutAndPay/checkout/checkout.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './items/cart/cart.component';
-import { ItemsNavComponent } from './items/items-nav/items-nav.component';
-import { PackagesListComponent } from './items/offers-list/offers-list.component';
-import { ProductListComponent } from './items/product-list/product-list.component';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ItemsComponent } from './items/items/items.component';
+import { AddTypeComponent } from './admin/add-type/add-type.component';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,13 +50,13 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     HeaderComponent,
     AboutComponent,
     FooterComponent,
-    ProductListComponent,
-    PackagesListComponent,
     CartComponent,
     CheckoutComponent,
     LoginComponent,
-    ItemsNavComponent,
+    ItemsComponent,
     ItemUploadComponent,
+    OrdersHistoryComponent,
+    AddTypeComponent,
   ],
   imports: [
     TabViewModule,
@@ -88,6 +89,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     AvatarGroupModule,
     BadgeModule,
     InputTextareaModule,
+    ToggleButtonModule,
   ],
   providers: [MessageService, DialogService, ConfirmationService],
   bootstrap: [AppComponent],

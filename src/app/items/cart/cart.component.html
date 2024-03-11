@@ -18,7 +18,7 @@
     >
       <div
         class="flex flex-row product-card w-full md:w-full lg:w-5 xl:w-5 mb-3 border-solid border-primary-100 border-1 p-3 border-round-lg"
-        *ngFor="let item of getAllItems()"
+        *ngFor="let item of cartItems"
         [class.shadow-1]="isSelected(item)"
       >
         <div class="flex flex-column align-items-start w-6">

@@ -29,7 +29,7 @@
     </div>
     <div class="col-9 justify-content-start flex">
       <input
-      required
+        required
         class="col-6"
         pInputText
         id="price"
@@ -42,7 +42,7 @@
     <div class="col-3 justify-content-end flex align-items-center">
       <label for="name">Type:</label>
     </div>
-    <div class="col-9 justify-content-start flex">
+    <div class="col-9 justify-content-start flex align-items-center">
       <p-dropdown
         *ngIf="itemsTypes"
         optionLabel="label"
@@ -52,6 +52,13 @@
         placeholder="Select Type"
       >
       </p-dropdown>
+
+      <p-button
+        class="ml-3"
+        type="button"
+        label="add-type"
+        (onClick)="gotoaddtype()"
+      ></p-button>
     </div>
   </div>
   <div class="col-12 flex">
@@ -60,7 +67,6 @@
     </div>
     <div class="col-9 justify-content-start flex">
       <textarea
-
         required
         class="col-10"
         rows="5"
