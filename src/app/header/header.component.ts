@@ -18,25 +18,25 @@ export class HeaderComponent {
       label: 'Home',
       icon: 'pi pi-fw pi-home',
       routerLink: ['/home'],
-      styleClass: 'bold-label',
+      styleClass: 'bold-label p-2',
     },
     {
       label: 'About',
       icon: 'pi pi-fw pi-info-circle',
       routerLink: ['/about'],
-      styleClass: 'bold-label',
+      styleClass: 'bold-label p-2',
     },
     {
       label: 'Products',
       icon: 'pi pi-fw pi-shopping-cart',
       routerLink: ['/items'],
-      styleClass: 'bold-label',
+      styleClass: 'bold-label p-2',
     },
     {
       label: 'Contact',
       icon: 'pi pi-fw pi-phone',
       routerLink: ['/contact'],
-      styleClass: 'bold-label',
+      styleClass: 'bold-label p-2',
     },
   ];
   ngOnInit() {

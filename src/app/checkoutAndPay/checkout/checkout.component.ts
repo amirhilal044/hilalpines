@@ -2,8 +2,8 @@ import { Component, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
-import { OrdersService } from './../../items/shared/orders.service';
 import { CartService } from 'src/app/items/shared/cart.service';
+import { OrdersService } from './../../items/shared/orders.service';
 
 @Component({
   selector: 'app-checkout',

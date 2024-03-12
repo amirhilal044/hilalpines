@@ -2,10 +2,7 @@
   <div
     class="flex flex-column md:flex-row md:justify-content-around align-items-center w-12 homeImage"
   >
-    <div
-      class="align-self-center w-8 md:w-4 mt-4 md:mt-0"
-      style="margin: 0% 0% 5%"
-    >
+    <div class="align-self-center w-8 md:w-4 mt-4 md:mt-0">
       <p
         class="line-height-3 md:text-xl mt-3 md:mt-0 text-left md:text-justify mb-2"
         style="color: white"
@@ -23,6 +20,7 @@
         label="SEE PRODUCTS"
         [routerLink]="['/items']"
         class="text-primary"
+        [style]="{ padding: '8px' }"
       ></p-button>
     </div>
     <p-carousel
@@ -47,9 +45,7 @@
             </div>
             <div>
               <h2 class="mt-5 text-white">{{ product.name }}</h2>
-              <h3 class="text-xl text-white">
-                ${{ product.price }}
-              </h3>
+              <h3 class="text-xl text-white">${{ product.price }}</h3>
             </div>
           </div>
         </div>
@@ -104,5 +100,6 @@
     type="button"
     label="BUY OFFERS"
     [routerLink]="['/items']"
+    [style]="{ padding: '8px', margin:'3px' }"
   ></p-button>
 </section>

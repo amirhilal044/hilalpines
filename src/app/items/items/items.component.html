@@ -11,7 +11,8 @@
       <input
         placeholder="Search"
         type="search"
-        class="input h-full"
+        pInputText
+        class="input"
         #searchQuery
         type="text"
         (input)="onSearchUpdated(searchQuery.value)"
@@ -19,9 +20,10 @@
     </div>
 
     <div class="w-auto ml-2 flex flex-row align-items-center">
-      <ul *ngFor="let type of itemsTypes" class="w-full">
-        <li class="w-6rem list-none mr-2">
+      <ul *ngFor="let type of itemsTypes">
+        <li class="list-none mr-2">
           <p-toggleButton
+            [style]="{ width: '10vw', height: '30px' }"
             [style.color]="type.checked ? '#fff' : '#a4a3a3'"
             [onLabel]="type.type"
             [offLabel]="type.type"
@@ -31,7 +33,7 @@
       </ul>
     </div>
   </div>
-  <span><i class="pi pi-filter text-lg"></i></span>
+  <span><i class="pi pi-filter text-xl text-gray-600"></i></span>
 </section>
 <div class="flex flex-row flex-wrap justify-content-between m-3">
   <div
