@@ -2,6 +2,7 @@ import { AuthGuard } from './../shared/auth.guard';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as CryptoJS from 'crypto-js';
+import { SHA256, enc } from 'crypto-js';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
 
@@ -24,11 +25,11 @@ export class LoginComponent implements OnInit {
   login(): void {
     if (this.loginForm.valid) {
 
-      const hashedUsername = CryptoJS.SHA256(this.loginForm.get('username')?.value).toString(
-        CryptoJS.enc.Hex
+      const hashedUsername = SHA256(this.loginForm.get('username')?.value).toString(
+        enc.Hex
       );
-      const hashedPassword = CryptoJS.SHA256(this.loginForm.get('password')?.value).toString(
-        CryptoJS.enc.Hex
+      const hashedPassword = SHA256(this.loginForm.get('password')?.value).toString(
+        enc.Hex
       );
 
 
