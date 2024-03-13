@@ -22,7 +22,6 @@ const routes: Routes = [
     path: 'admin',
     canActivate: [AuthGuard],
     children: [
-
       {
         path: 'item-upload',
         component: ItemUploadComponent,
@@ -30,10 +29,11 @@ const routes: Routes = [
       {
         path: 'orders-history',
         component: OrdersHistoryComponent,
-      }, {
+      },
+      {
         path: 'add-type',
-        component: AddTypeComponent
-      }
+        component: AddTypeComponent,
+      },
     ],
   },
   {
@@ -76,7 +76,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

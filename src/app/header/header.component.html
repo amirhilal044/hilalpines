@@ -1,5 +1,8 @@
 <div class="flex justify-content-between">
-  <p-menubar [model]="items" [style]="{'background-color': 'white', 'border': 'none'}">
+  <p-menubar
+    [model]="items"
+    [style]="{ 'background-color': 'white', border: 'none' }"
+  >
     <ng-template pTemplate="start">
       <a href="/">
         <img src="assets/images/LOGO.png" height="80" class="mr-2" />
@@ -16,10 +19,9 @@
       icon="pi pi-shopping-cart"
       [disabled]="numberOfCartItems == 0"
       (click)="redirectToCart()"
-      [style]="{'padding': '8px'}"
-
+      [style]="{ padding: '8px' }"
     ></p-button>
 
-    <p class="md:text-3xl md:mr-5 ml-3 font-bold text-primary">Hilal Pines</p>
+    <p class="md:text-3xl mr-3 ml-3 font-bold text-primary">Hilal Pines</p>
   </div>
 </div>
